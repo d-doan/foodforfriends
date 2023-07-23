@@ -26,4 +26,5 @@ public class User {
     private String email;
     // friendGroups might be wonky with the @AllArgsConstructor
     // private List<Group> friendGroups;
+    // private List<Review> reviews;
 }

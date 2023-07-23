@@ -9,10 +9,13 @@ import jakarta.persistence.*;
 
 @Data
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class Review {
 
+    @NonNull
     private Business business;
     @NonNull
+    private User user;
     private Double rating;
     private String description;
 }

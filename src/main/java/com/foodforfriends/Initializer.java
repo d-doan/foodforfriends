@@ -10,6 +10,9 @@ import com.foodforfriends.model.Group;
 import com.foodforfriends.model.GroupRepository;
 import com.foodforfriends.model.User;
 
+/*
+ * Used for mocking data in db for in-ram testing purposes
+ */
 @Component
 public class Initializer implements CommandLineRunner {
 
