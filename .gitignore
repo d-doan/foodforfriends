@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### React ###
+.src\main\java\com\foodforfriends\app\node_modules
