@@ -20,8 +20,8 @@ const App = () => {
         <div className="App-intro">
           <h2>DUMMY GROUP List</h2>
           {groups.map(group =>
-            <div key={group.id}>
-              {group.nickname}
+            <div key={group['id']}>
+              {group['nickname']}
             </div>
           )}
         </div>
