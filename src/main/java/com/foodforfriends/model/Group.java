@@ -15,6 +15,7 @@ import java.util.Set;
 @Table(name = "user_group")
 public class Group {
 
+    // not sure if need id
     @Id
     @GeneratedValue
     private Long id;

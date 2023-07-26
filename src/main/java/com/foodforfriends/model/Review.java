@@ -18,4 +18,7 @@ public class Review {
     private User user;
     private Double rating;
     private String description;
+
+    // maybe add photo option
+    // not sure how that would fit in json but problem for later
 }
