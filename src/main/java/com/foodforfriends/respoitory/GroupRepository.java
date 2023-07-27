@@ -1,6 +1,8 @@
-package com.foodforfriends.model;
+package com.foodforfriends.respoitory;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.foodforfriends.model.Group;
 
 public interface GroupRepository extends JpaRepository<Group, Long> {
 

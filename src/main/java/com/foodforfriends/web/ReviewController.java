@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.foodforfriends.model.IBusiness;
 import com.foodforfriends.model.Review;
-import com.foodforfriends.model.ReviewRepository;
 import com.foodforfriends.model.User;
+import com.foodforfriends.respoitory.ReviewRepository;
 
 @RestController
 public class ReviewController {

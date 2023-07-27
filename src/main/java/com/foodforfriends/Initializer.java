@@ -7,8 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.foodforfriends.model.Group;
-import com.foodforfriends.model.GroupRepository;
 import com.foodforfriends.model.User;
+import com.foodforfriends.respoitory.GroupRepository;
 
 /*
  * Used for mocking data in db for in-ram testing purposes

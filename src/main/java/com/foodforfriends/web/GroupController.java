@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodforfriends.model.Group;
-import com.foodforfriends.model.GroupRepository;
+import com.foodforfriends.respoitory.GroupRepository;
 
 @RestController
 public class GroupController {
