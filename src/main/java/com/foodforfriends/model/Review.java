@@ -12,11 +12,17 @@ import jakarta.persistence.*;
 @RequiredArgsConstructor
 public class Review {
 
+    // probably don't need business instance var, instead business should hold
+    // List<Review>
+    // similar thing with user
+    // composite key of some sort? (User, business)
+    // what about multiple reviews of the same place? - (User, business, Date) ?
     @NonNull
-    private Business business;
+    private IBusiness business;
     @NonNull
     private User user;
     private Double rating;
+    private Integer cost;
     private String description;
 
     // maybe add photo option
