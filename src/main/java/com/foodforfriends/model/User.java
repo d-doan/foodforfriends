@@ -7,8 +7,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Data
@@ -26,5 +29,6 @@ public class User {
     private String email;
     // friendGroups might be wonky with the @AllArgsConstructor
     // private List<Group> friendGroups;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Review> reviews;
 }

@@ -1,15 +1,21 @@
 package com.foodforfriends.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-
+import lombok.ToString;
 import jakarta.persistence.*;
 
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
+@ToString(exclude = "restaurant")
 public class Review {
 
     // probably don't need business instance var, instead business should hold
@@ -17,9 +23,17 @@ public class Review {
     // similar thing with user
     // composite key of some sort? (User, business)
     // what about multiple reviews of the same place? - (User, business, Date) ?
+
+    // PLACEHOLDER ID
+    @Id
+    @GeneratedValue
+    private Long id;
+
     @NonNull
-    private IBusiness business;
+    @ManyToOne
+    private Restaurant restaurant;
     @NonNull
+    @OneToOne
     private User user;
     private Double rating;
     private Integer cost;
