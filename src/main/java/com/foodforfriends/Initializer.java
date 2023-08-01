@@ -12,6 +12,7 @@ import com.foodforfriends.model.Restaurant;
 import com.foodforfriends.model.Review;
 // import com.foodforfriends.model.User;
 import com.foodforfriends.respoitory.RestaurantRepository;
+import com.foodforfriends.respoitory.ReviewRepository;
 
 /*
  * Used for mocking data in db for in-ram testing purposes
@@ -20,16 +21,18 @@ import com.foodforfriends.respoitory.RestaurantRepository;
 public class Initializer implements CommandLineRunner {
 
     private final RestaurantRepository restaurantRepository;
+    private final ReviewRepository reviewRepository;
 
-    public Initializer(RestaurantRepository restaurantRepository) {
+    public Initializer(RestaurantRepository restaurantRepository, ReviewRepository reviewRepository) {
         this.restaurantRepository = restaurantRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @Override
     public void run(String... strings) {
         // User dan = User.builder().username("nggv2").displayName("Dan").build();
-        // User allen =
-        // User.builder().username("authtooth").displayName("Allen").build();
+        // User matthew =
+        // User.builder().username("waffle").displayName("Matthew").build();
 
         System.out.println("\n----------------------RESTAURANT----------------------\n");
         Stream.of("restaurant1", "restaurant2").forEach(name -> restaurantRepository.save(new Restaurant(name)));
@@ -38,7 +41,7 @@ public class Initializer implements CommandLineRunner {
         Review review1 = Review.builder().restaurantName("restaurant1").username("nggv2").rating(3.0).cost(2)
                 .description("mid")
                 .build();
-        Review review2 = Review.builder().restaurantName("restaurant1").username("authtooth").rating(5.0).cost(1)
+        Review review2 = Review.builder().restaurantName("restaurant1").username("waffle").rating(4.0).cost(1)
                 .description("wowzers")
                 .build();
         List<Review> reviewList1 = new ArrayList<Review>(Arrays.asList(review1, review2));
@@ -47,5 +50,10 @@ public class Initializer implements CommandLineRunner {
 
         restaurantRepository.findAll().forEach(System.out::println);
 
+        System.out.println("\n----------------------REVIEW----------------------\n");
+        reviewRepository.save(review1);
+        reviewRepository.save(review2);
+
+        reviewRepository.findAll().forEach(System.out::println);
     }
 }
