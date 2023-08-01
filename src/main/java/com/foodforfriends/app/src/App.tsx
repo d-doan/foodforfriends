@@ -4,13 +4,13 @@ import './App.css';
 
 const App = () => {
 
-  const [groups, setGroups] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    fetch('groups')
+    fetch('restaurants')
       .then(response => response.json())
       .then(data => {
-        setGroups(data);
+        setRestaurants(data);
       })
   }, []);
 
@@ -18,10 +18,10 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <div className="App-intro">
-          <h2>DUMMY GROUP List</h2>
-          {groups.map(group =>
-            <div key={group['id']}>
-              {group['nickname']}
+          <h2>DUMMY RESTAURANT List</h2>
+          {restaurants.map(restaurant =>
+            <div key={restaurant['id']}>
+              {restaurant['name']}
             </div>
           )}
         </div>

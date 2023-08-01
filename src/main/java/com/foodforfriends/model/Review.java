@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import jakarta.persistence.*;
 
 @Data
@@ -15,7 +14,6 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@ToString(exclude = "restaurant")
 public class Review {
 
     // probably don't need business instance var, instead business should hold
@@ -30,11 +28,9 @@ public class Review {
     private Long id;
 
     @NonNull
-    @ManyToOne
-    private Restaurant restaurant;
+    private String restaurantName;
     @NonNull
-    @OneToOne
-    private User user;
+    private String username;
     private Double rating;
     private Integer cost;
     private String description;

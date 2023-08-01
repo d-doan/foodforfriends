@@ -2,14 +2,12 @@ package com.foodforfriends.web;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,18 +37,16 @@ public class RestaurantController {
 
     @GetMapping("/restaurant/{name}")
     ResponseEntity<?> getRestaurant(@PathVariable String name) {
-        Optional<Restaurant> restaraunt = restaurantRepository.findById(name);
-        return restaraunt.map(response -> ResponseEntity.ok().body(response))
+        Optional<Restaurant> restaurant = restaurantRepository.findById(name);
+        return restaurant.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
-    // also janky because getName and getId datatypes are difference
 
     @PostMapping("/restaurant")
     ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant) throws URISyntaxException {
         log.info("Request to create restaurant: {}", restaurant);
         Restaurant result = restaurantRepository.save(restaurant);
-        return ResponseEntity.created(new URI("/api/restaurant/" +
+        return ResponseEntity.created(new URI("/restaurant/" +
                 result.getName())).body(result);
     }
 
@@ -63,7 +59,7 @@ public class RestaurantController {
 
     @DeleteMapping("/restaurant/{name}")
     public ResponseEntity<?> deleteRestaurant(@PathVariable String name) {
-        log.info("Request to delete group: {}", name);
+        log.info("Request to delete restaurant: {}", name);
         restaurantRepository.deleteById(name);
         return ResponseEntity.ok().build();
     }
