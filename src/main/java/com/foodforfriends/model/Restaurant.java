@@ -22,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "restaurants")
 public class Restaurant {
 
-    // might be able to refactor variables below to a business abstract class/class
     // id will become name of restaraunt generated from gmaps api later
     @Id
     @NonNull
@@ -34,8 +33,6 @@ public class Restaurant {
     private Integer avgCost;
     // add filter categories later
 
-    // these messages were originally used to implement an interface that got
-    // deleted so can probably delete
     public Double calculateRating() {
         // can't have a rating without reviews
         if (reviews.size() == 0)
