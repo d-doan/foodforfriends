@@ -27,8 +27,7 @@ public class User {
     private String displayName;
     private String password;
     private String email;
-    // friendGroups might be wonky with the @AllArgsConstructor
-    // private List<Group> friendGroups;
+    private List<String> friendList;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Review> reviews;
 }
