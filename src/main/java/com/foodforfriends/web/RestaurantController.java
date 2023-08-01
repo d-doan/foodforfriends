@@ -37,12 +37,10 @@ public class RestaurantController {
 
     @GetMapping("/restaurant/{name}")
     ResponseEntity<?> getRestaurant(@PathVariable String name) {
-        Optional<Restaurant> restaraunt = restaurantRepository.findById(name);
-        return restaraunt.map(response -> ResponseEntity.ok().body(response))
+        Optional<Restaurant> restaurant = restaurantRepository.findById(name);
+        return restaurant.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
-    // also janky because getName and getId datatypes are difference
 
     @PostMapping("/restaurant")
     ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant) throws URISyntaxException {
@@ -61,7 +59,7 @@ public class RestaurantController {
 
     @DeleteMapping("/restaurant/{name}")
     public ResponseEntity<?> deleteRestaurant(@PathVariable String name) {
-        log.info("Request to delete group: {}", name);
+        log.info("Request to delete restaurant: {}", name);
         restaurantRepository.deleteById(name);
         return ResponseEntity.ok().build();
     }

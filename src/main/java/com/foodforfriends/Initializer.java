@@ -10,9 +10,10 @@ import org.springframework.stereotype.Component;
 
 import com.foodforfriends.model.Restaurant;
 import com.foodforfriends.model.Review;
-// import com.foodforfriends.model.User;
+import com.foodforfriends.model.User;
 import com.foodforfriends.respoitory.RestaurantRepository;
 import com.foodforfriends.respoitory.ReviewRepository;
+import com.foodforfriends.respoitory.UserRepository;
 
 /*
  * Used for mocking data in db for in-ram testing purposes
@@ -20,19 +21,26 @@ import com.foodforfriends.respoitory.ReviewRepository;
 @Component
 public class Initializer implements CommandLineRunner {
 
+    private final UserRepository userRepository;
     private final RestaurantRepository restaurantRepository;
     private final ReviewRepository reviewRepository;
 
-    public Initializer(RestaurantRepository restaurantRepository, ReviewRepository reviewRepository) {
+    public Initializer(UserRepository userRepository, RestaurantRepository restaurantRepository,
+            ReviewRepository reviewRepository) {
+        this.userRepository = userRepository;
         this.restaurantRepository = restaurantRepository;
         this.reviewRepository = reviewRepository;
     }
 
     @Override
     public void run(String... strings) {
-        // User dan = User.builder().username("nggv2").displayName("Dan").build();
-        // User matthew =
-        // User.builder().username("waffle").displayName("Matthew").build();
+        System.out.println("\n----------------------USER----------------------\n");
+        User dan = User.builder().username("nggv2").displayName("Dan").password("password").email("dan@dan.com")
+                .build();
+        User matthew = User.builder().username("waffle").displayName("Matthew").build();
+        userRepository.save(dan);
+        userRepository.save(matthew);
+        userRepository.findAll().forEach(System.out::println);
 
         System.out.println("\n----------------------RESTAURANT----------------------\n");
         Stream.of("restaurant1", "restaurant2").forEach(name -> restaurantRepository.save(new Restaurant(name)));
