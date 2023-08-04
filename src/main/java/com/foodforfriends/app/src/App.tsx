@@ -1,7 +1,6 @@
 // import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout';
-import HomePage from './pages/home/HomePage';
 import { routes } from './routes';
 // import logo from './logo.svg';
 
