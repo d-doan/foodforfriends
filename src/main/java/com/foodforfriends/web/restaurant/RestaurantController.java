@@ -1,4 +1,4 @@
-package com.foodforfriends.web;
+package com.foodforfriends.web.restaurant;
 
 import java.net.URI;
 import java.net.URISyntaxException;
