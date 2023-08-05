@@ -1,13 +1,9 @@
 package com.foodforfriends.web.restaurant;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,49 +14,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodforfriends.model.Restaurant;
-import com.foodforfriends.respoitory.RestaurantRepository;
 
 @RestController
 public class RestaurantController {
 
-    private final Logger log = LoggerFactory.getLogger(RestaurantController.class);
-    private RestaurantRepository restaurantRepository;
-
-    public RestaurantController(RestaurantRepository restaurantRepository) {
-        this.restaurantRepository = restaurantRepository;
-    }
+    @Autowired
+    private RestaurantService restaurantService;
 
     @GetMapping("/restaurants")
     List<Restaurant> restaurants() {
-        return restaurantRepository.findAll();
+        return restaurantService.getRestaurants();
     }
 
     @GetMapping("/restaurant/{name}")
     ResponseEntity<?> getRestaurant(@PathVariable String name) {
-        Optional<Restaurant> restaurant = restaurantRepository.findById(name);
-        return restaurant.map(response -> ResponseEntity.ok().body(response))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return restaurantService.getRestaurant(name);
     }
 
     @PostMapping("/restaurant")
     ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant) throws URISyntaxException {
-        log.info("Request to create restaurant: {}", restaurant);
-        Restaurant result = restaurantRepository.save(restaurant);
-        return ResponseEntity.created(new URI("/restaurant/" +
-                result.getName())).body(result);
+        return restaurantService.createRestaurant(restaurant);
     }
 
     @PutMapping("/restaurant/{name}")
     ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant) {
-        log.info("Request to update restaurant: {}", restaurant);
-        Restaurant result = restaurantRepository.save(restaurant);
-        return ResponseEntity.ok().body(result);
+        return restaurantService.updateRestaurant(restaurant);
     }
 
     @DeleteMapping("/restaurant/{name}")
     public ResponseEntity<?> deleteRestaurant(@PathVariable String name) {
-        log.info("Request to delete restaurant: {}", name);
-        restaurantRepository.deleteById(name);
-        return ResponseEntity.ok().build();
+        return restaurantService.deleteRestaurant(name);
     }
 }
