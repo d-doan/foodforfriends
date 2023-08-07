@@ -9,6 +9,8 @@ import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBullet
 import DefaultPage2 from "../pages/dashboard/DefaultPage2";
 import ReviewPage from "../pages/reviews/ReviewPage";
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
+import FriendPage from "../pages/friends/FriendPage";
+import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 
 /**
  * Create paths for each page. These will show up in the sidebar.
@@ -52,6 +54,16 @@ const appRoutes: RouteType[] = [
                 }
             }
         ]
+    },
+    // Friend Page
+    {
+        path: "/friends",
+                element: <FriendPage />,
+                state: "friends",
+                sidebarProps: {
+                    displayText: "Friends",
+                    icon: <GroupOutlinedIcon />
+                }
     },
     // Review Page
     {
