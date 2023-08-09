@@ -4,6 +4,7 @@
 type Review = {
     id: number;
     restaurantName: string;
+    username: string;
     rating: number;
     cost: number;
     description: string;
@@ -11,9 +12,9 @@ type Review = {
 
 type Restaurant = {
     name: string;
+    reviews: Review[];
     avgRating: number;
     avgCost: number;
-    reviews: Review[];
 };
 
 export interface ReviewProps {

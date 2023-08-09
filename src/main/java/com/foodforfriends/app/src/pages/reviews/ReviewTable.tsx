@@ -9,8 +9,13 @@ const ReviewRow = ({ review }: ReviewProps) => {
     return (
         <div
             className='list-group-item'
-            key={review['restaurantName']}>
-            {review['restaurantName']}
+            key={review['id']}>
+            {review['username']} said:
+            <br></br>
+            {review['description']}
+            <br></br>
+            Rating: {review['rating']}/5
+            Cost: {review['cost']}/5
         </div>
     );
 }
