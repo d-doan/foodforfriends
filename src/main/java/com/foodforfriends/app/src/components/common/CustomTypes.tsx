@@ -1,6 +1,7 @@
 // Common types used in project, similar to spring POJO's
+// pass in interfaces to use for props
 
-export type Review = {
+type Review = {
     id: number;
     restaurantName: string;
     rating: number;
@@ -8,8 +9,21 @@ export type Review = {
     description: string;
 };
 
-export type Restaurant = {
+type Restaurant = {
     name: string;
     avgRating: number;
     avgCost: number;
+    reviews: Review[];
 };
+
+export interface ReviewProps {
+    review: Review
+}
+
+export interface RestaurantProps {
+    restaurant: Restaurant
+}
+
+export interface RestaurantListProps {
+    restaurants: Restaurant[];
+}

@@ -1,44 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
-import { Review, Restaurant } from '../../components/common/CustomTypes';
+import { ReviewProps, RestaurantProps, RestaurantListProps } from '../../components/common/CustomTypes';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import { useState } from 'react';
 
-// 3 components
-// 1. entire table
-// 2. restaurants
-// 3. reviews
+// next step would be adding collapsible - useState + onClick and the mui icons in import statements
 
-
-
-function ReviewRow({ restaurantName, rating, cost, description }: Review) {
+const ReviewRow = ({ review }: ReviewProps) => {
     return (
-        <tr>
-            <td>{restaurantName}</td>
-            <td>{description}</td>
-        </tr>
+        <div
+            className='list-group-item'
+            key={review['restaurantName']}>
+            {review['restaurantName']}
+        </div>
     );
 }
 
-function RestaurantRow({ name, avgRating, avgCost }: Restaurant) {
-    return (
-        <tr>
-            <th>{name}</th>
-        </tr>
-    );
-}
-
-// maybe make this a function
-// what data type is restaurants (prop)
-const ReviewTable = ({ /* restaurants */ }) => {
-
-    // need to map out restaurant and review into arrays
+const RestaurantRow = ({ restaurant }: RestaurantProps) => {
 
     return (
-        <MDBTable bordered striped>
-            <MDBTableHead>
-
-            </MDBTableHead>
-        </MDBTable>
+        <div className='list-group-item'>
+            {restaurant.name}
+            <div className='list-group'>
+                {restaurant['reviews'].map(review =>
+                    <ReviewRow review={review}></ReviewRow>
+                )}
+            </div>
+        </div>
     )
+}
+
+const ReviewTable = ({ restaurants }: RestaurantListProps) => {
+
+    return (
+        <div className='list-group'>
+            {restaurants.map(restaurant =>
+                <RestaurantRow restaurant={restaurant}></RestaurantRow>
+            )}
+        </div>
+    );
 };
 
 export default ReviewTable;
