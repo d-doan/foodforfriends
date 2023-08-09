@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import AddReviewButtons from './AddReviewButtons';
 
 type Props = {};
 
@@ -17,6 +18,7 @@ const ReviewPage = (props: Props) => {
     <div className="App">
       <header className="App-header">
         <div className="App-intro">
+          <AddReviewButtons />
           <h2>Review List</h2>
           {restaurants.map(restaurant =>
             <div key={restaurant['id']}>

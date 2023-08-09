@@ -3,6 +3,7 @@ import { RouteType } from "./config";
 import { ReactNode } from "react";
 import PageWrapper from "../components/layout/PageWrapper";
 import appRoutes from "./appRoutes";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const generateRoute = (routes: RouteType[]): ReactNode => {
     return routes.map((route, index) => (
