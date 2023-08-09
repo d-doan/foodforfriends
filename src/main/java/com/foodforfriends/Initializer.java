@@ -46,8 +46,8 @@ public class Initializer implements CommandLineRunner {
                 Review review1 = Review.builder().restaurantName("restaurant1").username("nggv2").rating(3.0).cost(2)
                                 .description("mid")
                                 .build();
-                Review review2 = Review.builder().restaurantName("restaurant1").username("waffle").rating(1.0).cost(5)
-                                .description("You cook with obsession, not love. Even your hot dishes are cold. You're a chef. Your single purpose on this Earth is to serve people food that they might actually like, and you have failed. You've failed.")
+                Review review2 = Review.builder().restaurantName("restaurant1").username("waffle").rating(4.0).cost(5)
+                                .description("Then you're kidding yourself. Come on, Chef. I thought tonight was a night of hard home truths. This is one of them. You cook with obsession, not love. Even your hot dishes are cold. You're a chef. Your single purpose on this Earth is to serve people food that they might actually like, and you have failed. You've failed. And you've bored me. And the worst part is I'm still fucking hungry.")
                                 .build();
                 reviewRepository.save(review1);
                 reviewRepository.save(review2);
