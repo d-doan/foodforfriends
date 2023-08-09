@@ -33,6 +33,7 @@ public class Review {
     private String username;
     private Double rating;
     private Integer cost;
+    @Lob
     private String description;
 
     // maybe add photo option
