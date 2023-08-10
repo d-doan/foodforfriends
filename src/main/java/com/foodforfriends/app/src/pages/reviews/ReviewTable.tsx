@@ -10,6 +10,8 @@ const ReviewRow = ({ review }: ReviewProps) => {
         <div
             className='list-group-item'
             key={review['id']}>
+            review id: {review['id']}
+            <br></br>
             {review['username']} said:
             <br></br>
             {review['description']}
