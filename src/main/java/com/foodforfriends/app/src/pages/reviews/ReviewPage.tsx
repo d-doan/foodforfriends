@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import AddReviewButtons from './AddReviewButtons';
 import ReviewTable from './ReviewTable';
 
 
@@ -14,7 +15,10 @@ const ReviewPage = () => {
   }, []);
 
   return (
-    <ReviewTable restaurants={restaurants}></ReviewTable>
+    <div>
+      <AddReviewButtons />
+      <ReviewTable restaurants={restaurants}></ReviewTable>
+    </div>
   );
 
   //   return (
