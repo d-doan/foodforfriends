@@ -48,7 +48,7 @@ public class ReviewService {
         return ResponseEntity.ok().body(result);
     }
 
-    public ResponseEntity<?> deleteReview(@PathVariable Long id) {
+    public ResponseEntity<?> deleteReview(Long id) {
         log.info("Request to delete review: {}", id);
         reviewRepository.deleteById(id);
         return ResponseEntity.ok().build();

@@ -3,6 +3,7 @@ import { Button, Form, Row, Col } from 'react-bootstrap';
 
 function DeleteReviewButton() {
     const [reviewId, setReviewId] = useState('');
+    const [status, setStatus] = useState('');
 
     const reviewChangeHandler = (e: SyntheticEvent) => {
         setReviewId((e.target as HTMLInputElement).value);
@@ -10,10 +11,13 @@ function DeleteReviewButton() {
 
     const submitHandler = (e: SyntheticEvent) => {
 
-        // TODO actually delete the review
+        // move alert to something similar to below
+        // https://stackblitz.com/edit/react-http-delete-request-examples-fetch?file=App%2FDeleteRequestHooks.jsx
+
+        fetch('review/' + reviewId, { method: 'DELETE' })
+            .then(() => setStatus('has been deleted'))
 
         setReviewId('');
-
         return alert("Review " + reviewId + " has been deleted");
     }
     return (
