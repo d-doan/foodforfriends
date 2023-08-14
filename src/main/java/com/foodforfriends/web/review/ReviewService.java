@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.foodforfriends.model.Review;
-import com.foodforfriends.respoitory.ReviewRepository;
+import com.foodforfriends.repository.ReviewRepository;
+import com.foodforfriends.web.restaurant.RestaurantService;
 
 @Service
 public class ReviewService {
@@ -24,6 +25,8 @@ public class ReviewService {
 
     @Autowired
     private ReviewRepository reviewRepository;
+    @Autowired
+    private RestaurantService restaurantService;
     private final Logger log = LoggerFactory.getLogger(ReviewService.class);
 
     Collection<Review> getReviews() {
@@ -48,9 +51,16 @@ public class ReviewService {
         return ResponseEntity.ok().body(result);
     }
 
-    public ResponseEntity<?> deleteReview(@PathVariable Long id) {
+    ResponseEntity<?> deleteReview(@PathVariable Long id) {
         log.info("Request to delete review: {}", id);
-        reviewRepository.deleteById(id);
-        return ResponseEntity.ok().build();
+        if (getReview(id).getStatusCode() != HttpStatus.NOT_FOUND) {
+            Review review = (Review) getReview(id).getBody();
+            if (review != null) {
+                restaurantService.removeReview(review.getRestaurantName(), review);
+                reviewRepository.deleteById(id);
+                return ResponseEntity.ok().build();
+            }
+        }
+        return ResponseEntity.notFound().build();
     }
 }

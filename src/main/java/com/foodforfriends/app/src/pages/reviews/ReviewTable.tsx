@@ -10,6 +10,8 @@ const ReviewRow = ({ review }: ReviewProps) => {
         <div
             className='list-group-item'
             key={review['id']}>
+            review id: {review['id']}
+            <br></br>
             {review['username']} said:
             <br></br>
             {review['description']}
@@ -23,7 +25,8 @@ const ReviewRow = ({ review }: ReviewProps) => {
 const RestaurantRow = ({ restaurant }: RestaurantProps) => {
 
     return (
-        <div className='list-group-item'>
+        <div className='list-group-item'
+            key={restaurant['name']}>
             {restaurant.name}
             <div className='list-group'>
                 {restaurant['reviews'].map(review =>
@@ -37,7 +40,8 @@ const RestaurantRow = ({ restaurant }: RestaurantProps) => {
 const ReviewTable = ({ restaurants }: RestaurantListProps) => {
 
     return (
-        <div className='list-group'>
+        <div className='list-group'
+            key={restaurants.length}>
             {restaurants.map(restaurant =>
                 <RestaurantRow restaurant={restaurant}></RestaurantRow>
             )}

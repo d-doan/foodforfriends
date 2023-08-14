@@ -1,4 +1,4 @@
-package com.foodforfriends.respoitory;
+package com.foodforfriends.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

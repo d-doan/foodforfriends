@@ -26,7 +26,7 @@ public class Restaurant {
     @Id
     @NonNull
     private String name;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
     private Double avgRating;
     // maybe make cost an enum later

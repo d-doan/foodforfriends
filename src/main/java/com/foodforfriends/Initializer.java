@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 import com.foodforfriends.model.Restaurant;
 import com.foodforfriends.model.Review;
 import com.foodforfriends.model.User;
-import com.foodforfriends.respoitory.RestaurantRepository;
-import com.foodforfriends.respoitory.ReviewRepository;
-import com.foodforfriends.respoitory.UserRepository;
+import com.foodforfriends.repository.RestaurantRepository;
+import com.foodforfriends.repository.ReviewRepository;
+import com.foodforfriends.repository.UserRepository;
 
 /*
  * Used for mocking data in db for in-ram testing purposes
