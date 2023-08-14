@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.foodforfriends.model.Review;
-import com.foodforfriends.respoitory.ReviewRepository;
+import com.foodforfriends.repository.ReviewRepository;
 
 @Service
 public class ReviewService {

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.foodforfriends.model.Restaurant;
-import com.foodforfriends.respoitory.RestaurantRepository;
+import com.foodforfriends.repository.RestaurantRepository;
 
 @Service
 public class RestaurantService {
