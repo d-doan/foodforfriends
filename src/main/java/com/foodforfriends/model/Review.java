@@ -14,6 +14,7 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(name = "reviews")
 public class Review {
 
     // probably don't need business instance var, instead business should hold

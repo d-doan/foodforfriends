@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.foodforfriends.model.User;
-import com.foodforfriends.respoitory.UserRepository;
+import com.foodforfriends.repository.UserRepository;
 
 @Service
 public class UserService {
