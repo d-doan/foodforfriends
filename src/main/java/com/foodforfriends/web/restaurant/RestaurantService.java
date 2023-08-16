@@ -67,4 +67,27 @@ public class RestaurantService {
         }
         return ResponseEntity.notFound().build();
     }
+
+    public ResponseEntity<?> addReview(String restaurantName, Review review) {
+        log.info("Request to add review: {}", review.getId());
+        ResponseEntity<?> response = getRestaurant(restaurantName);
+        if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
+            Restaurant r = new Restaurant(restaurantName);
+            try {
+                createRestaurant(r);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+        response = getRestaurant(restaurantName);
+        Restaurant restaurant = ((Restaurant) response.getBody());
+        if (restaurant != null) {
+            restaurant.getReviews().add(review);
+            log.info("Current Restaurant List: {}", restaurantRepository.findAll());
+            updateRestaurant(restaurant);
+            return ResponseEntity.ok().build();
+        }
+        
+        return ResponseEntity.notFound().build();
+    }
 }

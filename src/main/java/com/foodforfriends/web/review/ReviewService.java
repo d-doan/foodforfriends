@@ -42,6 +42,8 @@ public class ReviewService {
     ResponseEntity<Review> createReview(@RequestBody Review review) throws URISyntaxException {
         log.info("Request to create review: {}", review);
         Review result = reviewRepository.save(review);
+        restaurantService.addReview(review.getRestaurantName(), review);
+        // gonna have to add review to user reviewList as well
         return ResponseEntity.created(new URI("/review/" + result.getId())).body(result);
     }
 

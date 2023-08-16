@@ -30,7 +30,7 @@ const RestaurantRow = ({ restaurant }: RestaurantProps) => {
             {restaurant.name}
             <div className='list-group'>
                 {restaurant['reviews'].map(review =>
-                    <ReviewRow review={review}></ReviewRow>
+                    <ReviewRow review={review} key={review.id}/>
                 )}
             </div>
         </div>
@@ -43,7 +43,7 @@ const ReviewTable = ({ restaurants }: RestaurantListProps) => {
         <div className='list-group'
             key={restaurants.length}>
             {restaurants.map(restaurant =>
-                <RestaurantRow restaurant={restaurant}></RestaurantRow>
+                <RestaurantRow restaurant={restaurant} key={restaurant.name}/>
             )}
         </div>
     );

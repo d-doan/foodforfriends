@@ -1,3 +1,4 @@
+import { wait } from '@testing-library/user-event/dist/utils';
 import { SyntheticEvent, useState, useEffect } from 'react';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 
@@ -24,21 +25,26 @@ function AddReviewButtons() {
         setDescription((e.target as HTMLInputElement).value);
     };
 
-    const submitHandler = (e: SyntheticEvent) => {
+    const SubmitHandler = (e: SyntheticEvent) => {
         // create review and add to repo's
-
         // useEffect(() => {
+        // TODO Header probably needs to be editied
 
-        //   // TODO Header probably needs to be editied
-        //   const requestOptions = {
-        //     method: 'POST',
-        //     headers: {},
-        //     body: JSON.stringify({ restaurantName: restaurantName, username: username, rating: rating, cost: cost})
-        //   };
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                restaurantName: restaurantName,
+                username: username,
+                rating: rating,
+                cost: cost,
+                description: description
+            })
+        };
 
-        //   fetch('review', requestOptions)
-        //     .then(response => response.json)
-        //     .then(data => {})
+        fetch('review', requestOptions)
+        .then(response => response.json())
+        .then(data => {});
         // });
 
         // reset values to default
@@ -57,7 +63,7 @@ function AddReviewButtons() {
 
     return (
         <div>
-            <Form onSubmit={submitHandler}>
+            <Form onSubmit={SubmitHandler}>
                 <Form.Group as={Row} className="mb-3" controlId="restaurant">
                     <Form.Label column sm={1}>Restaurant</Form.Label>
                     <Col sm={5}>
@@ -66,7 +72,7 @@ function AddReviewButtons() {
                             placeholder="Restaurant Name"
                             value={restaurantName}
                             onChange={restaurantChangeHandler}
-                            required
+                            //required
                         />
                     </Col>
                 </Form.Group>
@@ -79,7 +85,7 @@ function AddReviewButtons() {
                             placeholder="Username"
                             value={username}
                             onChange={usernameChangeHandler}
-                            required
+                            //required
                         />
                     </Col>
                 </Form.Group>
@@ -92,7 +98,7 @@ function AddReviewButtons() {
                             placeholder="Rating"
                             value={rating}
                             onChange={ratingChangeHandler}
-                            required
+                            //required
                         />
                     </Col>
                 </Form.Group>
@@ -128,13 +134,6 @@ function AddReviewButtons() {
                     </Col>
                 </Form.Group>
             </Form>
-            <div>
-                Restaurant: {restaurantName} <br />
-                Username: {username} <br />
-                Rating: {rating} <br />
-                Cost: {cost} <br />
-                Description: {description}
-            </div>
         </div>
     );
 }

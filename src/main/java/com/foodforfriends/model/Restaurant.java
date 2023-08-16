@@ -1,5 +1,6 @@
 package com.foodforfriends.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.foodforfriends.utility.Utility;
@@ -27,7 +28,7 @@ public class Restaurant {
     @NonNull
     private String name;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Review> reviews;
+    private List<Review> reviews = new ArrayList<Review>();
     private Double avgRating;
     // maybe make cost an enum later
     private Integer avgCost;
