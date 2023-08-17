@@ -1,4 +1,4 @@
-package com.foodforfriends.web.user;
+package com.foodforfriends.web.controller;
 
 import java.net.URISyntaxException;
 import java.util.List;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodforfriends.model.User;
+import com.foodforfriends.web.service.UserService;
 
 @RestController
 public class UserController {

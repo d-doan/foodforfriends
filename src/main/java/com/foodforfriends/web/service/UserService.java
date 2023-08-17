@@ -1,4 +1,4 @@
-package com.foodforfriends.web.user;
+package com.foodforfriends.web.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -24,23 +24,23 @@ public class UserService {
     private UserRepository userRepository;
     private final Logger log = LoggerFactory.getLogger(UserService.class);
 
-    List<User> getUsers() {
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 
-    ResponseEntity<?> getUser(@PathVariable String username) {
+    public ResponseEntity<?> getUser(@PathVariable String username) {
         Optional<User> user = userRepository.findById(username);
         return user.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    ResponseEntity<User> createUser(@RequestBody User user) throws URISyntaxException {
+    public ResponseEntity<User> createUser(@RequestBody User user) throws URISyntaxException {
         log.info("Request to create user: {}", user);
         User result = userRepository.save(user);
         return ResponseEntity.created(new URI("/user/" + result.getUsername())).body(result);
     }
 
-    ResponseEntity<User> updateUser(@RequestBody User user) {
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
         log.info("Request to update user: {}", user);
         User result = userRepository.save(user);
         return ResponseEntity.ok().body(result);
