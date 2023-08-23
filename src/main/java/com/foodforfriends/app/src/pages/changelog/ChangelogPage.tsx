@@ -1,10 +1,14 @@
 import React from 'react';
+import MapComponent from './MapComponent';
 
 type Props = {};
 
 const ChangelogPage = (props: Props) => {
   return (
-    <div>ChangelogPage</div>
+    <div className="ChangelogPage">
+      ChangelogPage
+      <MapComponent />
+    </div>
   );
 };
 
