@@ -3,13 +3,13 @@ import MapComponent from './MapComponent';
 
 type Props = {};
 
-const ChangelogPage = (props: Props) => {
+const MapPage = (props: Props) => {
   return (
-    <div className="ChangelogPage">
-      ChangelogPage
+    <div className="MapPage">
+      Map Page
       <MapComponent />
     </div>
   );
 };
 
-export default ChangelogPage;
+export default MapPage;

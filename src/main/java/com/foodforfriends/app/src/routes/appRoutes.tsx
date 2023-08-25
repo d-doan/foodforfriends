@@ -4,7 +4,7 @@ import DashboardPageLayout from "../pages/dashboard/DashboardPageLayout";
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import DefaultPage from "../pages/dashboard/DefaultPage";
 import DashboardIndex from "../pages/dashboard/DashboardIndex";
-import ChangelogPage from "../pages/changelog/ChangelogPage";
+import MapPage from "../pages/changelog/MapPage";
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import DefaultPage2 from "../pages/dashboard/DefaultPage2";
 import ReviewPage from "../pages/reviews/ReviewPage";
@@ -58,32 +58,32 @@ const appRoutes: RouteType[] = [
     // Friend Page
     {
         path: "/friends",
-                element: <FriendPage />,
-                state: "friends",
-                sidebarProps: {
-                    displayText: "Friends",
-                    icon: <GroupOutlinedIcon />
-                }
+        element: <FriendPage />,
+        state: "friends",
+        sidebarProps: {
+            displayText: "Friends",
+            icon: <GroupOutlinedIcon />
+        }
     },
     // Review Page
     {
         path: "/reviews",
-                element: <ReviewPage />,
-                state: "reviews",
-                sidebarProps: {
-                    displayText: "Reviews",
-                    icon: <RateReviewOutlinedIcon />
-                }
+        element: <ReviewPage />,
+        state: "reviews",
+        sidebarProps: {
+            displayText: "Reviews",
+            icon: <RateReviewOutlinedIcon />
+        }
     },
-    // Changelog Page
+    // Map Page
     {
-        path: "/changelog",
-                element: <ChangelogPage />,
-                state: "changelog",
-                sidebarProps: {
-                    displayText: "Changelog",
-                    icon: <FormatListBulletedOutlinedIcon />
-                }
+        path: "/map",
+        element: <MapPage />,
+        state: "map",
+        sidebarProps: {
+            displayText: "Map",
+            icon: <FormatListBulletedOutlinedIcon />
+        }
     }
 ];
 

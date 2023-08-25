@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 
 const containerStyle = {
@@ -15,14 +15,36 @@ const center = {
 // TODO REPLACE right hand size of gmaps api key with actual key to test
 // find better solution later
 const MapComponent: React.FC = () => {
+
+    const [map, setMap] = useState<google.maps.Map | null>(null);
+    const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
+
+    useEffect(() => {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    const { latitude, longitude } = position.coords;
+                    setUserLocation({ lat: latitude, lng: longitude });
+                },
+                error => {
+                    console.error("Error getting user location:", error);
+                }
+            );
+        } else {
+            console.error("Geolocation is not available");
+        }
+    }, [])
+
     return (
-        <LoadScript googleMapsApiKey="REPLACE_API_HERE">
+        <LoadScript googleMapsApiKey="INSERT_API_KEY_HERE">
             <GoogleMap
                 mapContainerStyle={containerStyle}
-                center={center}
+                center={userLocation || center}
                 zoom={18}
+                onLoad={mapInstance => setMap(mapInstance)}
             >
-                <Marker position={center} />
+                {userLocation && <Marker position={userLocation} />}
             </GoogleMap>
         </LoadScript>
     );
