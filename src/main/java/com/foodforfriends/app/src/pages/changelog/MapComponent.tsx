@@ -19,8 +19,8 @@ const MapComponent: React.FC = () => {
     const [map, setMap] = useState<google.maps.Map | null>(null);
     const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
 
+    // get user location
     useEffect(() => {
-
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 position => {
@@ -36,8 +36,31 @@ const MapComponent: React.FC = () => {
         }
     }, [])
 
+    // DUMMY VALUES FOR TESTING NEARBY RESTAURANTS
+    const [restaurants, setRestaurants] = useState([])
+    useEffect(() => {
+        if (userLocation !== null) {
+            const distParams = new URLSearchParams({
+                lat: userLocation.lat.toString(),
+                lng: userLocation.lng.toString(),
+                dist: '10000'
+            });
+
+            const apiUrl = `map/nearby?${distParams}`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    setRestaurants(data);
+                })
+                .catch(error => {
+                    console.error("Error fetching data: ", error);
+                })
+            console.log(restaurants);
+        }
+    }, [userLocation]);
+
     return (
-        <LoadScript googleMapsApiKey="INSERT_API_KEY_HERE">
+        <LoadScript googleMapsApiKey="PLACE_API_KEY_HERE">
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={userLocation || center}
@@ -47,6 +70,7 @@ const MapComponent: React.FC = () => {
                 {userLocation && <Marker position={userLocation} />}
             </GoogleMap>
         </LoadScript>
+
     );
 };
 
