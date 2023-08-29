@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.PlacesApi;
+import com.google.maps.FindPlaceFromTextRequest.LocationBias;
 import com.google.maps.model.LatLng;
 import com.google.maps.model.PlaceType;
 import com.google.maps.model.PlacesSearchResponse;
@@ -39,23 +40,19 @@ public class MapService {
                 .await();
     }
 
-    // implement Place Search for food place types
-    // https://developers.google.com/maps/documentation/places/web-service/supported_types
+    public PlacesSearchResponse searchForRestaurant(
+            @RequestParam String queryString,
+            @RequestParam double lat,
+            @RequestParam double lng) throws Exception {
 
-    // dummy auto-gen code for reference
+        LatLng userLocation = new LatLng(lat, lng);
 
-    // public PlacesSearchResponse searchNearbyPlaces(double lat, double lng) throws
-    // Exception {
-    // GeoApiContext context = new GeoApiContext.Builder()
-    // .apiKey(apiKey)
-    // .build();
-
-    // return PlacesApi.nearbySearchQuery(context, new
-    // com.google.maps.model.LatLng(lat, lng))
-    // .radius(1000) // Search radius in meters
-    // .type(PlaceType.RESTAURANT) // Example: searching for restaurants
-    // .await();
-    // }
+        return PlacesApi.textSearchQuery(geoApiContext, queryString)
+                .location(userLocation)
+                .radius(10000)
+                .type(PlaceType.RESTAURANT)
+                .await();
+    }
 
     public ResponseEntity<String> geocodeAddress(@RequestParam String address) {
         // Create a RestTemplate to make HTTP requests

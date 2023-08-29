@@ -60,7 +60,7 @@ const MapComponent: React.FC = () => {
     }, [userLocation]);
 
     return (
-        <LoadScript googleMapsApiKey="PLACE_API_KEY_HERE">
+        <LoadScript googleMapsApiKey="INSERT_API_KEY_HERE">
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={userLocation || center}
@@ -75,40 +75,3 @@ const MapComponent: React.FC = () => {
 };
 
 export default MapComponent;
-
-
-// code doesn't work, was autogened -> can probably make work by implementing
-// api endpoint in spring for locations with marker info
-
-// import React, { useEffect, useState } from 'react';
-// import { GoogleMap, Marker } from '@react-google-maps/api';
-
-// function MapComponent() {
-//     const [mapData, setMapData] = useState<any[]>([]);
-
-//     useEffect(() => {
-//         // Fetch map data from your Spring Boot API endpoint
-//         fetch('/locations')
-//             .then(response => response.json())
-//             .then(data => setMapData(data));
-//     }, []);
-
-//     return (
-//         <div>
-//             <GoogleMap
-//                 center={{ lat: 0, lng: 0 }}
-//                 zoom={4}
-//                 mapContainerStyle={{ width: '100%', height: '500px' }}
-//             >
-//                 {mapData.map((marker, index) => (
-//                     <Marker
-//                         key={index}
-//                         position={{ lat: marker.lat, lng: marker.lng }}
-//                     />
-//                 ))}
-//             </GoogleMap>
-//         </div>
-//     );
-// }
-
-// export default MapComponent;

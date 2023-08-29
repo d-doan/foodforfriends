@@ -24,6 +24,16 @@ public class MapController {
         return mapService.getNearbyRestaurants(lat, lng, dist);
     }
 
+    // Given a specific name, finds list of restaurants near location
+    @GetMapping("/map/search")
+    public PlacesSearchResponse searchForRestaurant(
+            @RequestParam String queryString,
+            @RequestParam double lat,
+            @RequestParam double lng) throws Exception {
+
+        return mapService.searchForRestaurant(queryString, lat, lng);
+    }
+
     @GetMapping("/geocode")
     public ResponseEntity<String> geocodeAddress(@RequestParam String address) {
         return mapService.geocodeAddress(address);
