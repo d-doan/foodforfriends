@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,9 +31,11 @@ public class Restaurant {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<Review>();
     private Double avgRating;
-    // maybe make cost an enum later
     private Integer avgCost;
-    // add filter categories later
+
+    // may get changed to place id - refer to gmaps api
+    @OneToOne
+    private Location location;
 
     public Double calculateRating() {
         // can't have a rating without reviews

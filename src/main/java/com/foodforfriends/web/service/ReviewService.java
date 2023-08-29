@@ -1,4 +1,4 @@
-package com.foodforfriends.web.review;
+package com.foodforfriends.web.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.foodforfriends.model.Review;
 import com.foodforfriends.repository.ReviewRepository;
-import com.foodforfriends.web.restaurant.RestaurantService;
 
 @Service
 public class ReviewService {
@@ -29,17 +28,17 @@ public class ReviewService {
     private RestaurantService restaurantService;
     private final Logger log = LoggerFactory.getLogger(ReviewService.class);
 
-    Collection<Review> getReviews() {
+    public Collection<Review> getReviews() {
         return reviewRepository.findAll();
     }
 
-    ResponseEntity<?> getReview(@PathVariable Long id) {
+    public ResponseEntity<?> getReview(@PathVariable Long id) {
         Optional<Review> reviews = reviewRepository.findById(id);
         return reviews.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    ResponseEntity<Review> createReview(@RequestBody Review review) throws URISyntaxException {
+    public ResponseEntity<Review> createReview(@RequestBody Review review) throws URISyntaxException {
         log.info("Request to create review: {}", review);
         Review result = reviewRepository.save(review);
         restaurantService.addReview(review.getRestaurantName(), review);
@@ -47,13 +46,13 @@ public class ReviewService {
         return ResponseEntity.created(new URI("/review/" + result.getId())).body(result);
     }
 
-    ResponseEntity<Review> updateReview(@RequestBody Review review) {
+    public ResponseEntity<Review> updateReview(@RequestBody Review review) {
         log.info("Request to update review: {}", review);
         Review result = reviewRepository.save(review);
         return ResponseEntity.ok().body(result);
     }
 
-    ResponseEntity<?> deleteReview(@PathVariable Long id) {
+    public ResponseEntity<?> deleteReview(@PathVariable Long id) {
         log.info("Request to delete review: {}", id);
         if (getReview(id).getStatusCode() != HttpStatus.NOT_FOUND) {
             Review review = (Review) getReview(id).getBody();

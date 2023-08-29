@@ -1,4 +1,4 @@
-package com.foodforfriends.web.restaurant;
+package com.foodforfriends.web.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,24 +25,24 @@ public class RestaurantService {
     private RestaurantRepository restaurantRepository;
     private final Logger log = LoggerFactory.getLogger(RestaurantService.class);
 
-    List<Restaurant> getRestaurants() {
+    public List<Restaurant> getRestaurants() {
         return restaurantRepository.findAll();
     }
 
-    ResponseEntity<?> getRestaurant(@PathVariable String name) {
+    public ResponseEntity<?> getRestaurant(@PathVariable String name) {
         Optional<Restaurant> restaurant = restaurantRepository.findById(name);
         return restaurant.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant) throws URISyntaxException {
+    public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant) throws URISyntaxException {
         log.info("Request to create restaurant: {}", restaurant);
         Restaurant result = restaurantRepository.save(restaurant);
         return ResponseEntity.created(new URI("/restaurant/" +
                 result.getName())).body(result);
     }
 
-    ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant) {
+    public ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant) {
         log.info("Request to update restaurant: {}", restaurant);
         Restaurant result = restaurantRepository.save(restaurant);
         return ResponseEntity.ok().body(result);
@@ -87,7 +86,7 @@ public class RestaurantService {
             updateRestaurant(restaurant);
             return ResponseEntity.ok().build();
         }
-        
+
         return ResponseEntity.notFound().build();
     }
 }
