@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.foodforfriends.model.Review;
 import com.foodforfriends.repository.ReviewRepository;
+import com.foodforfriends.utility.Utility;
 
 @Service
 public class ReviewService {
@@ -40,6 +41,7 @@ public class ReviewService {
 
     public ResponseEntity<Review> createReview(@RequestBody Review review) throws URISyntaxException {
         log.info("Request to create review: {}", review);
+        review.setDatePosted(Utility.getTime());
         Review result = reviewRepository.save(review);
         restaurantService.addReview(review.getRestaurantName(), review);
         // gonna have to add review to user reviewList as well
