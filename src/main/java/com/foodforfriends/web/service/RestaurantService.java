@@ -39,7 +39,7 @@ public class RestaurantService {
         log.info("Request to create restaurant: {}", restaurant);
         Restaurant result = restaurantRepository.save(restaurant);
         return ResponseEntity.created(new URI("/restaurant/" +
-                result.getName())).body(result);
+                result.getBusinessName())).body(result);
     }
 
     public ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant) {

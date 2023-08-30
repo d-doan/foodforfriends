@@ -56,7 +56,7 @@ public class Initializer implements CommandLineRunner {
                 Stream.of("restaurant1", "restaurant2")
                                 .forEach(name -> restaurantRepository.save(new Restaurant(name)));
 
-                Restaurant restaurant1 = restaurantRepository.findByName("restaurant1");
+                Restaurant restaurant1 = restaurantRepository.findByBusinessName("restaurant1");
                 List<Review> reviewList1 = new ArrayList<Review>(Arrays.asList(review1, review2));
                 restaurant1.setReviews(reviewList1);
                 restaurantRepository.save(restaurant1);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.foodforfriends.utility.Utility;
+import com.google.maps.model.Geometry;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -27,7 +28,10 @@ public class Restaurant {
     // id will become name of restaraunt generated from gmaps api later
     @Id
     @NonNull
-    private String name;
+    private String businessName;
+    private String readableAddress;
+    private Geometry encodedLocation;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<Review>();
     private Double avgRating;
