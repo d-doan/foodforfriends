@@ -5,6 +5,7 @@ type Review = {
     id: number;
     restaurantName: string;
     username: string;
+    datePosted: string;
     rating: number;
     cost: number;
     description: string;

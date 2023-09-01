@@ -32,6 +32,8 @@ public class Review {
     private String restaurantName;
     @NonNull
     private String username;
+    @NonNull
+    private String datePosted;
     private Double rating;
     private Integer cost;
     @Lob

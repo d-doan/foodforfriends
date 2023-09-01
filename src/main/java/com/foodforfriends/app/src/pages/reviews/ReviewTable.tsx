@@ -12,7 +12,7 @@ const ReviewRow = ({ review }: ReviewProps) => {
             key={review['id']}>
             review id: {review['id']}
             <br></br>
-            {review['username']} said:
+            On {review['datePosted']}, {review['username']} said:
             <br></br>
             {review['description']}
             <br></br>
