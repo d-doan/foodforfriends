@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.foodforfriends.utility.Utility;
 import com.google.maps.model.Geometry;
+import com.google.maps.model.LatLng;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -30,7 +31,7 @@ public class Restaurant {
     @NonNull
     private String businessName;
     private String readableAddress;
-    private Geometry encodedLocation;
+    private LatLng encodedLocation;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<Review>();

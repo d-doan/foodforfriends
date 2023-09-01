@@ -12,11 +12,18 @@ type Review = {
 };
 
 type Restaurant = {
-    name: string;
-    reviews: Review[];
+    businessName: string;
+    readableAddress: string;
+    encodedLocation: LatLng;
     avgRating: number;
     avgCost: number;
+    reviews: Review[];
 };
+
+type LatLng = {
+    lat: number;
+    lng: number;
+}
 
 export interface ReviewProps {
     review: Review

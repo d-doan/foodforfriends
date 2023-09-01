@@ -28,12 +28,11 @@ function AddReviewButtons() {
     const SubmitHandler = (e: SyntheticEvent) => {
         // create review and add to repo's
         // useEffect(() => {
-        // TODO Header probably needs to be editied
 
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
+            body: JSON.stringify({
                 restaurantName: restaurantName,
                 username: username,
                 rating: rating,
@@ -43,8 +42,8 @@ function AddReviewButtons() {
         };
 
         fetch('review', requestOptions)
-        .then(response => response.json())
-        .then(data => {});
+            .then(response => response.json())
+            .then(data => { });
         // });
 
         // reset values to default
@@ -72,7 +71,7 @@ function AddReviewButtons() {
                             placeholder="Restaurant Name"
                             value={restaurantName}
                             onChange={restaurantChangeHandler}
-                            //required
+                        //required
                         />
                     </Col>
                 </Form.Group>
@@ -85,7 +84,7 @@ function AddReviewButtons() {
                             placeholder="Username"
                             value={username}
                             onChange={usernameChangeHandler}
-                            //required
+                        //required
                         />
                     </Col>
                 </Form.Group>
@@ -98,7 +97,7 @@ function AddReviewButtons() {
                             placeholder="Rating"
                             value={rating}
                             onChange={ratingChangeHandler}
-                            //required
+                        //required
                         />
                     </Col>
                 </Form.Group>

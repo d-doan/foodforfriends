@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.foodforfriends.model.Review;
 import com.foodforfriends.web.service.ReviewService;
+import com.google.maps.model.PlacesSearchResult;
 
 @RestController
 public class ReviewController {
@@ -37,8 +38,14 @@ public class ReviewController {
         return reviewService.createReview(review);
     }
 
+    @PostMapping("/review/")
+    ResponseEntity<Review> createReview(@RequestBody Review review, @RequestBody PlacesSearchResult restaurantData)
+            throws URISyntaxException {
+        return reviewService.createReview(review, restaurantData);
+    }
+
     @PutMapping("/review/{id}")
-    ResponseEntity<Review> updateReview(@RequestBody Review review) {
+    ResponseEntity<Review> updateReview(@PathVariable Review review) {
         return reviewService.updateReview(review);
     }
 

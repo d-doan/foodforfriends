@@ -2,6 +2,7 @@ package com.foodforfriends.web.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.foodforfriends.model.Restaurant;
 import com.foodforfriends.model.Review;
 import com.foodforfriends.repository.RestaurantRepository;
+import com.google.maps.model.PlacesSearchResult;
 
 @Service
 public class RestaurantService {
@@ -40,6 +42,16 @@ public class RestaurantService {
         Restaurant result = restaurantRepository.save(restaurant);
         return ResponseEntity.created(new URI("/restaurant/" +
                 result.getBusinessName())).body(result);
+    }
+
+    public void createNewRestaurant(PlacesSearchResult apiResult, Review review) {
+        Restaurant r = new Restaurant(apiResult.name);
+        r.setReadableAddress(apiResult.formattedAddress);
+        r.setEncodedLocation(apiResult.geometry.location);
+        r.getReviews().add(review);
+        r.setAvgRating(review.getRating());
+        r.setAvgCost(review.getCost());
+        restaurantRepository.save(r);
     }
 
     public ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant) {
