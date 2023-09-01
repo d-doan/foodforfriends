@@ -34,6 +34,8 @@ public class Review {
     private String username;
     @NonNull
     private String datePosted;
+    @NonNull
+    private String dateReadable;
     private Double rating;
     private Integer cost;
     @Lob

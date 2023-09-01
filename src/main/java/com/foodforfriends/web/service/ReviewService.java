@@ -2,7 +2,10 @@ package com.foodforfriends.web.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -33,6 +36,13 @@ public class ReviewService {
         return reviewRepository.findAll();
     }
 
+    public Collection<Review> getSortedReviews() {
+        Collection<Review> rCollection = getReviews();
+        List<Review> rList = new ArrayList<>(rCollection);
+        Utility.sortReviews(rList);
+        return rList;
+    }
+
     public ResponseEntity<?> getReview(@PathVariable Long id) {
         Optional<Review> reviews = reviewRepository.findById(id);
         return reviews.map(response -> ResponseEntity.ok().body(response))
@@ -42,6 +52,11 @@ public class ReviewService {
     public ResponseEntity<Review> createReview(@RequestBody Review review) throws URISyntaxException {
         log.info("Request to create review: {}", review);
         review.setDatePosted(Utility.getTime());
+        try {
+            review.setDateReadable(Utility.timeToString(review.getDatePosted()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         Review result = reviewRepository.save(review);
         restaurantService.addReview(review.getRestaurantName(), review);
         // gonna have to add review to user reviewList as well

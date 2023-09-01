@@ -11,16 +11,27 @@ import ReviewPage from "../pages/reviews/ReviewPage";
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 import FriendPage from "../pages/friends/FriendPage";
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 
 /**
  * Create paths for each page. These will show up in the sidebar.
  */
 
 const appRoutes: RouteType[] = [
+    // Feed
     {
         index: true,
         element: <HomePage />,
-        state: "home"
+        state: "home",
+    },
+    {
+        path: "/",
+        element: <HomePage />,
+        state: "home",
+        sidebarProps: {
+            displayText: "Feed",
+            icon: <FeedOutlinedIcon />
+        },
     },
     // Dashboard Page
     {
