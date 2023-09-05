@@ -7,7 +7,7 @@ const MapPage = (props: Props) => {
   return (
     <div className="MapPage">
       Map Page
-      <MapComponent />
+      {/* <MapComponent /> */}
     </div>
   );
 };

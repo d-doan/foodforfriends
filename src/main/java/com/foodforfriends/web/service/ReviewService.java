@@ -14,11 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.foodforfriends.model.Restaurant;
 import com.foodforfriends.model.Review;
 import com.foodforfriends.repository.ReviewRepository;
 import com.foodforfriends.utility.Utility;
-import com.google.maps.model.PlacesSearchResponse;
 import com.google.maps.model.PlacesSearchResult;
 
 @Service

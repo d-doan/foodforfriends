@@ -11,6 +11,8 @@ import ReviewPage from "../pages/reviews/ReviewPage";
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 import FriendPage from "../pages/friends/FriendPage";
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import PostPage from "../pages/post/PostPage";
+import { DriveFileRenameOutline } from "@mui/icons-material";
 
 /**
  * Create paths for each page. These will show up in the sidebar.
@@ -83,6 +85,16 @@ const appRoutes: RouteType[] = [
         sidebarProps: {
             displayText: "Map",
             icon: <FormatListBulletedOutlinedIcon />
+        }
+    },
+    // Post Page
+    {
+        path: "/post",
+        element: <PostPage />,
+        state: "post",
+        sidebarProps: {
+            displayText: "Post",
+            icon: <DriveFileRenameOutline />
         }
     }
 ];

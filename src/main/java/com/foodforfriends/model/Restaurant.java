@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.foodforfriends.utility.Utility;
-import com.google.maps.model.Geometry;
 import com.google.maps.model.LatLng;
 
 import jakarta.persistence.CascadeType;
@@ -37,10 +36,6 @@ public class Restaurant {
     private List<Review> reviews = new ArrayList<Review>();
     private Double avgRating;
     private Integer avgCost;
-
-    // may get changed to place id - refer to gmaps api
-    @OneToOne
-    private Location location;
 
     public Double calculateRating() {
         // can't have a rating without reviews
