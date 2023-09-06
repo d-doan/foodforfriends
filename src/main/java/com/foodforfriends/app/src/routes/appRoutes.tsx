@@ -13,16 +13,27 @@ import FriendPage from "../pages/friends/FriendPage";
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import PostPage from "../pages/post/PostPage";
 import { DriveFileRenameOutline } from "@mui/icons-material";
+import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 
 /**
  * Create paths for each page. These will show up in the sidebar.
  */
 
 const appRoutes: RouteType[] = [
+    // Feed
     {
         index: true,
         element: <HomePage />,
-        state: "home"
+        state: "home",
+    },
+    {
+        path: "/",
+        element: <HomePage />,
+        state: "home",
+        sidebarProps: {
+            displayText: "Feed",
+            icon: <FeedOutlinedIcon />
+        },
     },
     // Dashboard Page
     {

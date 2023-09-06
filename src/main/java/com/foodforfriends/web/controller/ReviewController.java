@@ -28,6 +28,11 @@ public class ReviewController {
         return reviewService.getReviews();
     }
 
+    @GetMapping("/reviews-sorted")
+    Collection<Review> reviewsSorted() {
+        return reviewService.getSortedReviews();
+    }
+
     @GetMapping("/reviews/{id}")
     ResponseEntity<?> getReview(@PathVariable Long id) {
         return reviewService.getReview(id);

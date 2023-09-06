@@ -1,5 +1,6 @@
 package com.foodforfriends;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +35,7 @@ public class Initializer implements CommandLineRunner {
         }
 
         @Override
-        public void run(String... strings) {
+        public void run(String... strings) throws ParseException {
 
                 // -----------------------USER-----------------------
                 User dan = User.builder().username("nggv2").displayName("Dan").password("password").email("dan@dan.com")
@@ -44,18 +45,19 @@ public class Initializer implements CommandLineRunner {
                 userRepository.save(matthew);
 
                 // ----------------------REVIEW----------------------
-                Review review1 = Review.builder().restaurantName("restaurant1").username("nggv2")
-                                .datePosted(Utility.getTime()).rating(3.0).cost(2)
-                                .description("mid")
-                                .build();
-                Review review2 = Review.builder().restaurantName("restaurant1").username("waffle")
-                                .datePosted(Utility.getTime()).rating(4.0).cost(5)
-                                .description("Then you're kidding yourself. Come on, Chef. I thought tonight was a night of hard home truths. This is one of them. You cook with obsession, not love. Even your hot dishes are cold. You're a chef. Your single purpose on this Earth is to serve people food that they might actually like, and you have failed. You've failed. And you've bored me. And the worst part is I'm still fucking hungry.")
-                                .build();
-                Review review3 = Review.builder().restaurantName("restaurant1").username("Matthew")
-                                .datePosted("2023-08-29 16:34:25").rating(2.0).cost(2)
-                                .description("not bad but also not good")
-                                .build();
+
+                Review review1 = Review.builder().restaurantName("restaurant1").username("nggv2").datePosted(Utility.getTime())
+                                        .dateReadable(Utility.timeToString(Utility.getTime())).rating(3.0).cost(2).description("mid")
+                                        .build();
+                Review review2 = Review.builder().restaurantName("restaurant1").username("waffle").datePosted(Utility.getTime())
+                                        .dateReadable(Utility.timeToString(Utility.getTime())).rating(4.0).cost(5)
+                                        .description("Then you're kidding yourself. Come on, Chef. I thought tonight was a night of hard home truths. This is one of them. You cook with obsession, not love. Even your hot dishes are cold. You're a chef. Your single purpose on this Earth is to serve people food that they might actually like, and you have failed. You've failed. And you've bored me. And the worst part is I'm still fucking hungry.")
+                                        .build();
+                Review review3 = Review.builder().restaurantName("restaurant1").username("Matthew").datePosted("2023-08-29 10:30:00")
+                                        .dateReadable(Utility.timeToString("2023-08-29 10:30:00")).rating(2.0).cost(2)
+                                        .description("not bad but also not good")
+                                        .build();
+
                 reviewRepository.save(review1);
                 reviewRepository.save(review2);
                 reviewRepository.save(review3);

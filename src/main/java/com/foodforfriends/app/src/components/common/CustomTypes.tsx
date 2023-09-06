@@ -6,6 +6,7 @@ type Review = {
     restaurantName: string;
     username: string;
     datePosted: string;
+    dateReadable: string;
     rating: number;
     cost: number;
     description: string;
@@ -26,11 +27,15 @@ type LatLng = {
 }
 
 export interface ReviewProps {
-    review: Review
+    review: Review;
+}
+
+export interface ReviewListProps {
+    reviews: Review[];
 }
 
 export interface RestaurantProps {
-    restaurant: Restaurant
+    restaurant: Restaurant;
 }
 
 export interface RestaurantListProps {
