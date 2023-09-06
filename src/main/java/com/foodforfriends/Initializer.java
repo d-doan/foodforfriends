@@ -45,6 +45,7 @@ public class Initializer implements CommandLineRunner {
                 userRepository.save(matthew);
 
                 // ----------------------REVIEW----------------------
+
                 Review review1 = Review.builder().restaurantName("restaurant1").username("nggv2").datePosted(Utility.getTime())
                                         .dateReadable(Utility.timeToString(Utility.getTime())).rating(3.0).cost(2).description("mid")
                                         .build();
@@ -56,6 +57,7 @@ public class Initializer implements CommandLineRunner {
                                         .dateReadable(Utility.timeToString("2023-08-29 10:30:00")).rating(2.0).cost(2)
                                         .description("not bad but also not good")
                                         .build();
+
                 reviewRepository.save(review1);
                 reviewRepository.save(review2);
                 reviewRepository.save(review3);
@@ -64,7 +66,7 @@ public class Initializer implements CommandLineRunner {
                 Stream.of("restaurant1", "restaurant2")
                                 .forEach(name -> restaurantRepository.save(new Restaurant(name)));
 
-                Restaurant restaurant1 = restaurantRepository.findByName("restaurant1");
+                Restaurant restaurant1 = restaurantRepository.findByBusinessName("restaurant1");
                 List<Review> reviewList1 = new ArrayList<Review>(Arrays.asList(review1, review2, review3));
                 restaurant1.setReviews(reviewList1);
                 restaurantRepository.save(restaurant1);
