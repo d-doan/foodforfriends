@@ -12,6 +12,7 @@ import com.google.maps.PlacesApi;
 import com.google.maps.model.LatLng;
 import com.google.maps.model.PlaceType;
 import com.google.maps.model.PlacesSearchResponse;
+import com.google.maps.model.PlacesSearchResult;
 
 @Service
 public class MapService {
@@ -35,7 +36,7 @@ public class MapService {
                 .await();
     }
 
-    public PlacesSearchResponse searchForRestaurant(
+    public PlacesSearchResult[] searchForRestaurant(
             @RequestParam String queryString,
             @RequestParam double lat,
             @RequestParam double lng) throws Exception {
@@ -46,7 +47,7 @@ public class MapService {
                 .location(userLocation)
                 .radius(10000)
                 .type(PlaceType.RESTAURANT)
-                .await();
+                .await().results;
     }
 
     public ResponseEntity<String> geocodeAddress(@RequestParam String address) {
