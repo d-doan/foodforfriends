@@ -61,10 +61,13 @@ const PostPage = () => {
     // after form is submitted, redirect to review feed?
 
     return (
-        <div>
-            <h4>Search Restaurants</h4>
-            <RestaurantSearchBar onSearch={handleSearch}></RestaurantSearchBar>
-            {restaurants.length !== 0 && <RestaurantList restaurants={restaurants} restaurantClick={restaurantClick}></RestaurantList>}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div>
+                <h4>Search Restaurants</h4>
+                <RestaurantSearchBar onSearch={handleSearch}></RestaurantSearchBar>
+                <br></br>
+                {restaurants.length !== 0 && <RestaurantList restaurants={restaurants} restaurantClick={restaurantClick}></RestaurantList>}
+            </div>
         </div>
     );
 };

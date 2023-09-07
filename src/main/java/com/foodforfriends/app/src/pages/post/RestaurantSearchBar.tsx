@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TextField from '@mui/material/TextField';
 
 interface SearchBarProps {
     onSearch: (query: string) => void;
@@ -11,10 +12,6 @@ const RestaurantSearchBar = ({ onSearch }: SearchBarProps) => {
         setQuery(e.target.value);
     };
 
-    const handleSearch = () => {
-        onSearch(query);
-    }
-
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             onSearch(query);
@@ -23,14 +20,13 @@ const RestaurantSearchBar = ({ onSearch }: SearchBarProps) => {
 
     return (
         <div>
-            <input
-                type="text"
-                placeholder="Enter restaurant name"
-                value={query}
+            <TextField
+                id="outlined-basic"
+                label="Search Restaurants"
+                variant="outlined"
                 onChange={handleInputChange}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
             />
-            <button onClick={handleSearch}>Search</button>
         </div>
     );
 };
