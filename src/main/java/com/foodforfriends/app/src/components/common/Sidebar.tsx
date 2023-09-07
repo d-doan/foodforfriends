@@ -1,6 +1,6 @@
-import { Drawer, List, Toolbar, Stack, Avatar, ListItemButton, ListItemIcon } from "@mui/material"
+import { Drawer, List, Toolbar, Stack/*, Avatar, ListItemButton, ListItemIcon */ } from "@mui/material"
 import sizeConfigs from "../../configs/sizeConfigs";
-import assets from "../../assets/images";
+// import assets from "../../assets/images";
 import colorConfigs from "../../configs/colorConfigs";
 import appRoutes from "../../routes/appRoutes";
 import SidebarItem from "./SidebarItem";
@@ -32,7 +32,7 @@ const Sidebar = () => {
             justifyContent="center"
           >
             {/* Generate Top Icon */}
-            <RoomOutlinedIcon sx={{ fontSize: "42px", color: colorConfigs.logoColor}}/>
+            <RoomOutlinedIcon sx={{ fontSize: "42px", color: colorConfigs.logoColor }} />
           </Stack>
         </Toolbar>
         {/* Generate Sidebar Buttons */}

@@ -1,5 +1,4 @@
-import { wait } from '@testing-library/user-event/dist/utils';
-import { SyntheticEvent, useState, useEffect } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 
 function AddReviewButtons() {
