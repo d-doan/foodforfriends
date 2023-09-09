@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.foodforfriends.model.Restaurant;
 import com.foodforfriends.model.Review;
 import com.foodforfriends.repository.RestaurantRepository;
+import com.google.maps.model.PlacesSearchResult;
 
 @Service
 public class RestaurantService {
@@ -39,7 +40,17 @@ public class RestaurantService {
         log.info("Request to create restaurant: {}", restaurant);
         Restaurant result = restaurantRepository.save(restaurant);
         return ResponseEntity.created(new URI("/restaurant/" +
-                result.getName())).body(result);
+                result.getBusinessName())).body(result);
+    }
+
+    public void createNewRestaurant(PlacesSearchResult apiResult, Review review) {
+        Restaurant r = new Restaurant(apiResult.name);
+        r.setReadableAddress(apiResult.formattedAddress);
+        r.setEncodedLocation(apiResult.geometry.location);
+        r.getReviews().add(review);
+        r.setAvgRating(review.getRating());
+        r.setAvgCost(review.getCost());
+        restaurantRepository.save(r);
     }
 
     public ResponseEntity<Restaurant> updateRestaurant(@RequestBody Restaurant restaurant) {

@@ -1,7 +1,5 @@
 package com.foodforfriends.web.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +9,10 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.PlacesApi;
-import com.google.maps.FindPlaceFromTextRequest.LocationBias;
 import com.google.maps.model.LatLng;
 import com.google.maps.model.PlaceType;
 import com.google.maps.model.PlacesSearchResponse;
+import com.google.maps.model.PlacesSearchResult;
 
 @Service
 public class MapService {
@@ -24,8 +22,6 @@ public class MapService {
 
     @Autowired
     private GeoApiContext geoApiContext;
-
-    private final Logger log = LoggerFactory.getLogger(MapService.class);
 
     public PlacesSearchResponse getNearbyRestaurants(
             @RequestParam double lat,
@@ -40,7 +36,7 @@ public class MapService {
                 .await();
     }
 
-    public PlacesSearchResponse searchForRestaurant(
+    public PlacesSearchResult[] searchForRestaurant(
             @RequestParam String queryString,
             @RequestParam double lat,
             @RequestParam double lng) throws Exception {
@@ -51,7 +47,7 @@ public class MapService {
                 .location(userLocation)
                 .radius(10000)
                 .type(PlaceType.RESTAURANT)
-                .await();
+                .await().results;
     }
 
     public ResponseEntity<String> geocodeAddress(@RequestParam String address) {

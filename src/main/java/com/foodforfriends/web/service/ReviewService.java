@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.foodforfriends.model.Review;
 import com.foodforfriends.repository.ReviewRepository;
 import com.foodforfriends.utility.Utility;
+import com.google.maps.model.PlacesSearchResult;
 
 @Service
 public class ReviewService {
@@ -61,6 +62,21 @@ public class ReviewService {
         restaurantService.addReview(review.getRestaurantName(), review);
         // gonna have to add review to user reviewList as well
         return ResponseEntity.created(new URI("/review/" + result.getId())).body(result);
+    }
+
+    public ResponseEntity<Review> createReview(@RequestBody Review review,
+            @RequestBody PlacesSearchResult restaurantData) throws URISyntaxException {
+        // Add review to db
+        log.info("Request to create review: {}", review);
+        review.setRestaurantName(restaurantData.name);
+        review.setDatePosted(Utility.getTime());
+        Review newReview = reviewRepository.save(review);
+
+        if (restaurantService.getRestaurant(restaurantData.name).getStatusCode() == HttpStatus.NOT_FOUND) {
+            // Add restaurant to db if doesn't already exist
+            restaurantService.createNewRestaurant(restaurantData, newReview);
+        }
+        return ResponseEntity.created(new URI("/review/" + newReview.getId())).body(newReview);
     }
 
     public ResponseEntity<Review> updateReview(@RequestBody Review review) {

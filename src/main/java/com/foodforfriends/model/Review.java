@@ -17,12 +17,6 @@ import jakarta.persistence.*;
 @Table(name = "reviews")
 public class Review {
 
-    // probably don't need business instance var, instead business should hold
-    // List<Review>
-    // similar thing with user
-    // composite key of some sort? (User, business)
-    // what about multiple reviews of the same place? - (User, business, Date) ?
-
     // PLACEHOLDER ID
     @Id
     @GeneratedValue
@@ -41,6 +35,4 @@ public class Review {
     @Lob
     private String description;
 
-    // maybe add photo option
-    // not sure how that would fit in json but problem for later
 }

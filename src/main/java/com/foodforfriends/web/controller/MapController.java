@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.foodforfriends.web.service.MapService;
 import com.google.maps.model.PlacesSearchResponse;
+import com.google.maps.model.PlacesSearchResult;
 
 @RestController
 public class MapController {
@@ -26,7 +27,7 @@ public class MapController {
 
     // Given a specific name, finds list of restaurants near location
     @GetMapping("/map/search")
-    public PlacesSearchResponse searchForRestaurant(
+    public PlacesSearchResult[] searchForRestaurant(
             @RequestParam String queryString,
             @RequestParam double lat,
             @RequestParam double lng) throws Exception {
