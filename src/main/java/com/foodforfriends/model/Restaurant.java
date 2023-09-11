@@ -11,7 +11,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +24,6 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "restaurants")
 public class Restaurant {
 
-    // id will become name of restaraunt generated from gmaps api later
     @Id
     @NonNull
     private String businessName;
