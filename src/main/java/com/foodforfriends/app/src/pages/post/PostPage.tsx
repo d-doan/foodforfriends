@@ -69,10 +69,9 @@ const PostPage = () => {
     // after form is submitted, redirect to review feed?
 
     // TODO
-    // make restaurnta list rendering based on onClick
-    // also make form rendering based on onClick status
-    // not necessary use onClick var since we also need the x/back button of form
-    // to close form and rerender list
+    // make the form one blob
+    // add an x to the form which changes what is displayed
+    // how would the data be passed back up to this component? maybe similar to search
 
     return (
         <div>

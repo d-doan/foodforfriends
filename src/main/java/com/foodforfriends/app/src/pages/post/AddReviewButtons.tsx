@@ -2,15 +2,13 @@ import { SyntheticEvent, useState } from 'react';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 
 function AddReviewButtons({ restaurant }: any) {
-    const [restaurantName, setRestaurantName] = useState(''); // figure out onChange, getting values from text boxes
+    const restaurantName = restaurant.name;
     const [username, setUsername] = useState('');
     const [rating, setRating] = useState('');
     const [cost, setCost] = useState('');
     const [description, setDescription] = useState('');
 
-    const restaurantChangeHandler = (e: SyntheticEvent) => {
-        setRestaurantName((e.target as HTMLInputElement).value);
-    };
+
     const usernameChangeHandler = (e: SyntheticEvent) => {
         setUsername((e.target as HTMLInputElement).value);
     };
@@ -45,7 +43,6 @@ function AddReviewButtons({ restaurant }: any) {
             .then(data => { });
 
         // reset values to default
-        setRestaurantName('');
         setUsername('');
         setRating('');
         setCost('');
@@ -60,20 +57,8 @@ function AddReviewButtons({ restaurant }: any) {
 
     return (
         <div>
+            <h4>Review for {restaurantName}</h4>
             <Form onSubmit={SubmitHandler}>
-                <Form.Group as={Row} className="mb-3" controlId="restaurant">
-                    <Form.Label column sm={1}>Restaurant</Form.Label>
-                    <Col sm={5}>
-                        <Form.Control
-                            type="text"
-                            placeholder="Restaurant Name"
-                            value={restaurantName}
-                            onChange={restaurantChangeHandler}
-                        //required
-                        />
-                    </Col>
-                </Form.Group>
-
                 <Form.Group as={Row} className="mb-3" controlId="username">
                     <Form.Label column sm={1}>Username</Form.Label>
                     <Col sm={5}>
