@@ -69,9 +69,11 @@ const PostPage = () => {
     // after form is submitted, redirect to review feed?
 
     // TODO
-    // make the form one blob
+    // use the right api call so the restaurant is added too
     // add an x to the form which changes what is displayed
     // how would the data be passed back up to this component? maybe similar to search
+    // make the form one blob
+
 
     return (
         <div>

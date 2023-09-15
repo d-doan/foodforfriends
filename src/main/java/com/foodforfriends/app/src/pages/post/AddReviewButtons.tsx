@@ -1,6 +1,7 @@
 import { SyntheticEvent, useState } from 'react';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 
+// restaurant represents a PlacesSearchResult
 function AddReviewButtons({ restaurant }: any) {
     const restaurantName = restaurant.name;
     const [username, setUsername] = useState('');
@@ -22,23 +23,28 @@ function AddReviewButtons({ restaurant }: any) {
         setDescription((e.target as HTMLInputElement).value);
     };
 
-    const SubmitHandler = (e: SyntheticEvent) => {
+    const SubmitHandler = async (e: SyntheticEvent) => {
         // create review and add to repo's
         // useEffect(() => {
+
+        const newReview = {
+            restaurantName: restaurantName,
+            username: username,
+            rating: rating,
+            cost: cost,
+            description: description
+        };
 
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                restaurantName: restaurantName,
-                username: username,
-                rating: rating,
-                cost: cost,
-                description: description
+                review: newReview,
+                restaurantData: restaurant
             })
         };
 
-        fetch('review', requestOptions)
+        fetch('review/', requestOptions)
             .then(response => response.json())
             .then(data => { });
 

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.foodforfriends.model.Review;
+import com.foodforfriends.model.ReviewAndRestaurantData;
 import com.foodforfriends.repository.ReviewRepository;
 import com.foodforfriends.utility.Utility;
 import com.google.maps.model.PlacesSearchResult;
@@ -64,12 +65,20 @@ public class ReviewService {
         return ResponseEntity.created(new URI("/review/" + result.getId())).body(result);
     }
 
-    public ResponseEntity<Review> createReview(@RequestBody Review review,
-            @RequestBody PlacesSearchResult restaurantData) throws URISyntaxException {
+    public ResponseEntity<Review> createReview(@RequestBody ReviewAndRestaurantData reviewAndRestaurantData)
+            throws URISyntaxException {
         // Add review to db
+        Review review = reviewAndRestaurantData.getReview();
+        PlacesSearchResult restaurantData = reviewAndRestaurantData.getRestaurantData();
         log.info("Request to create review: {}", review);
         review.setRestaurantName(restaurantData.name);
         review.setDatePosted(Utility.getTime());
+        try {
+            review.setDateReadable(Utility.timeToString(review.getDatePosted()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         Review newReview = reviewRepository.save(review);
 
         if (restaurantService.getRestaurant(restaurantData.name).getStatusCode() == HttpStatus.NOT_FOUND) {
