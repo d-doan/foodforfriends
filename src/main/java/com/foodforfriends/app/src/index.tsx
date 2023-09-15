@@ -2,21 +2,34 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Login from './components/common/login';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import { CssBaseline } from '@mui/material';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 
+const domain = process.env.REACT_APP_AUTH0_DOMAIN!;
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID!;
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <CssBaseline />
-      <App />
-    </Provider>
+    <Auth0Provider
+      domain={domain}
+      clientId={clientId}
+      authorizationParams={{
+        redirect_uri: window.location.origin
+      }}
+    >
+      <Provider store={store}>
+        <CssBaseline />
+        <App />
+      </Provider>
+    </Auth0Provider>
   </React.StrictMode>
 );
 
