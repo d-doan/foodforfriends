@@ -1,13 +1,15 @@
 import { SyntheticEvent, useState } from 'react';
-import { Button, Form, Row, Col } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
-// restaurant represents a PlacesSearchResult
+// restaurant represents a PlacesSearchResult object
 function AddReviewButtons({ restaurant }: any) {
     const restaurantName = restaurant.name;
     const [username, setUsername] = useState('');
     const [rating, setRating] = useState('');
     const [cost, setCost] = useState('');
     const [description, setDescription] = useState('');
+    const navigate = useNavigate();
 
 
     const usernameChangeHandler = (e: SyntheticEvent) => {
@@ -24,8 +26,11 @@ function AddReviewButtons({ restaurant }: any) {
     };
 
     const SubmitHandler = async (e: SyntheticEvent) => {
-        // create review and add to repo's
-        // useEffect(() => {
+
+        // prevents full page reload, handles success and failure below
+        e.preventDefault();
+
+        console.log("submitted");
 
         const newReview = {
             restaurantName: restaurantName,
@@ -34,6 +39,8 @@ function AddReviewButtons({ restaurant }: any) {
             cost: cost,
             description: description
         };
+
+        console.log(newReview);
 
         const requestOptions = {
             method: 'POST',
@@ -45,82 +52,86 @@ function AddReviewButtons({ restaurant }: any) {
         };
 
         fetch('review/', requestOptions)
-            .then(response => response.json())
-            .then(data => { });
+            .then(response => {
+                if (!response.ok) {
+                    alert("An error has occured, please try again");
+                    throw new Error(`HTTP Error. Status: ${response.status}`);
+                }
+                // return response.json()
+            })
+            .then(data => {
+                console.log('Success:', data);
+                navigate('/');
+            })
+            .catch((error) => {
+                alert("An error has occured, please try again");
+            });
 
         // reset values to default
         setUsername('');
         setRating('');
         setCost('');
         setDescription('');
-
-        return alert("Restaurant: " + restaurantName
-            + "\nUsername: " + username
-            + "\nRating: " + rating
-            + "\nCost: " + cost
-            + "\nDescription: " + description);
     };
 
     return (
         <div>
             <h4>Review for {restaurantName}</h4>
             <Form onSubmit={SubmitHandler}>
-                <Form.Group as={Row} className="mb-3" controlId="username">
-                    <Form.Label column sm={1}>Username</Form.Label>
-                    <Col sm={5}>
-                        <Form.Control
-                            type="text"
-                            placeholder="Username"
-                            value={username}
-                            onChange={usernameChangeHandler}
-                        //required
-                        />
-                    </Col>
+
+                <Form.Group className="mb-3" controlId="username">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={usernameChangeHandler}
+                    />
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3" controlId="rating">
-                    <Form.Label column sm={1}>Rating</Form.Label>
-                    <Col sm={1}>
-                        <Form.Control
-                            type="text"
-                            placeholder="Rating"
-                            value={rating}
-                            onChange={ratingChangeHandler}
-                        //required
-                        />
-                    </Col>
+                <Form.Group className="mb-3" controlId="rating">
+                    <Form.Label>Rating</Form.Label>
+                    <Form.Control
+                        as="select"
+                        required
+                        value={rating}
+                        onChange={ratingChangeHandler}>
+                        <option value="" disabled></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </Form.Control>
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3" controlId="cost">
-                    <Form.Label column sm={1}>Cost</Form.Label>
-                    <Col sm={1}>
-                        <Form.Control
-                            type="text"
-                            placeholder="Cost"
-                            value={cost}
-                            onChange={costChangeHandler}
-                        />
-                    </Col>
+                <Form.Group className="mb-3" controlId="cost">
+                    <Form.Label>Cost</Form.Label>
+                    <Form.Control
+                        as="select"
+                        required
+                        value={cost}
+                        onChange={costChangeHandler}>
+                        <option value="" disabled></option>
+                        <option value="1">$</option>
+                        <option value="2">$$</option>
+                        <option value="3">$$$</option>
+                    </Form.Control>
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3" controlId="description">
-                    <Form.Label column sm={1}>Description</Form.Label>
-                    <Col sm={5}>
-                        <Form.Control
-                            as="textarea"
-                            rows={3}
-                            placeholder="Description"
-                            value={description}
-                            onChange={descriptionChangeHandler}
-                        />
-                    </Col>
+                <Form.Group className="mb-3" controlId="description">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Description"
+                        value={description}
+                        onChange={descriptionChangeHandler}
+                    />
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
-                    <Col sm="auto">
-                        <Button type="submit">Submit Review</Button>
-                    </Col>
-                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit Review
+                </Button>
             </Form>
         </div>
     );

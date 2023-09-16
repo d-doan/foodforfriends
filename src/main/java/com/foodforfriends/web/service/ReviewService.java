@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.foodforfriends.model.Restaurant;
 import com.foodforfriends.model.Review;
 import com.foodforfriends.model.ReviewAndRestaurantData;
 import com.foodforfriends.repository.ReviewRepository;
@@ -53,16 +52,15 @@ public class ReviewService {
     }
 
     public ResponseEntity<Review> createReview(@RequestBody Review review) throws URISyntaxException {
-        log.info("Request to create review: {}", review);
         review.setDatePosted(Utility.getTime());
         try {
             review.setDateReadable(Utility.timeToString(review.getDatePosted()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        log.info("Request to create review: {}", review);
         Review result = reviewRepository.save(review);
         restaurantService.addReview(review.getRestaurantName(), review);
-        // gonna have to add review to user reviewList as well
         return ResponseEntity.created(new URI("/review/" + result.getId())).body(result);
     }
 

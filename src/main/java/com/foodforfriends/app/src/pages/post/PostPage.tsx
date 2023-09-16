@@ -3,13 +3,8 @@ import RestaurantList from "./RestaurantList";
 import RestaurantSearchBar from "./RestaurantSearchBar";
 import AddReviewButtons from "./AddReviewButtons";
 
-// TODO implement loading symbol though so its not jank
-
-// TODO implement on click handler opening review page
-
-// TODO save to db after form
-
-// TODO make look nicer
+// TODO implement loading animation
+// TODO fix submission bug where can't convert from undefined string to Double
 
 const PostPage = () => {
     const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
@@ -24,8 +19,6 @@ const PostPage = () => {
                 position => {
                     const { latitude, longitude } = position.coords;
                     setUserLocation({ lat: latitude, lng: longitude });
-
-                    console.log(latitude + " " + longitude);
                 },
                 error => {
                     console.error("Error getting user location:", error);
@@ -53,27 +46,13 @@ const PostPage = () => {
             .then((data) => {
                 setRestaurantsSearchList(data);
             });
-        console.log(restaurantsSearchList);
     };
 
     // TODO make click bring up review page
     const restaurantClick = (restaurant: any) => {
-        // TODO: uncomment line below this later
         setShowReviewForm(true);
         setSelectedRestaurant(restaurant);
-        console.log("CLICKED " + restaurant.formattedAddress);
-        // open to form that calls the createReview function with 2 parameters
     };
-
-    // when something on list is clicked then bring up more shenanigans for review
-    // after form is submitted, redirect to review feed?
-
-    // TODO
-    // use the right api call so the restaurant is added too
-    // add an x to the form which changes what is displayed
-    // how would the data be passed back up to this component? maybe similar to search
-    // make the form one blob
-
 
     return (
         <div>
