@@ -1,9 +1,9 @@
-import { SyntheticEvent, useState, useEffect } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { Button, Form, Row, Col } from 'react-bootstrap';
 
 function DeleteReviewButton() {
     const [reviewId, setReviewId] = useState('');
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState('not created');
 
     const reviewChangeHandler = (e: SyntheticEvent) => {
         setReviewId((e.target as HTMLInputElement).value);
@@ -18,7 +18,7 @@ function DeleteReviewButton() {
             .then(() => setStatus('has been deleted'))
 
         setReviewId('');
-        return alert("Review " + reviewId + " has been deleted");
+        return alert("Review " + reviewId + " " + status);
     }
     return (
         <div>
@@ -41,7 +41,6 @@ function DeleteReviewButton() {
                     </Col>
                 </Form.Group>
             </Form>
-
         </div>
     )
 }

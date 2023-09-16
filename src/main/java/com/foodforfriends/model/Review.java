@@ -17,7 +17,6 @@ import jakarta.persistence.*;
 @Table(name = "reviews")
 public class Review {
 
-    // PLACEHOLDER ID
     @Id
     @GeneratedValue
     private Long id;

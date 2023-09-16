@@ -1,7 +1,5 @@
 import { ReviewProps, RestaurantProps, RestaurantListProps } from '../../components/common/CustomTypes';
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { useState } from 'react';
 
 // next step would be adding collapsible - useState + onClick and the mui icons in import statements
 
