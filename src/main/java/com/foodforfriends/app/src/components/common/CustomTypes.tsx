@@ -16,8 +16,6 @@ type Restaurant = {
     businessName: string;
     readableAddress: string;
     encodedLocation: LatLng;
-    avgRating: number;
-    avgCost: number;
     reviews: Review[];
 };
 

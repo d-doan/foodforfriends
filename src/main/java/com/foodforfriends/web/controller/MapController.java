@@ -1,7 +1,6 @@
 package com.foodforfriends.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,11 +32,6 @@ public class MapController {
             @RequestParam double lng) throws Exception {
 
         return mapService.searchForRestaurant(queryString, lat, lng);
-    }
-
-    @GetMapping("/geocode")
-    public ResponseEntity<String> geocodeAddress(@RequestParam String address) {
-        return mapService.geocodeAddress(address);
     }
 
 }

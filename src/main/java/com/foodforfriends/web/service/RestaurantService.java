@@ -48,8 +48,6 @@ public class RestaurantService {
         r.setReadableAddress(apiResult.formattedAddress);
         r.setEncodedLocation(apiResult.geometry.location);
         r.getReviews().add(review);
-        r.setAvgRating(review.getRating());
-        r.setAvgCost(review.getCost());
         restaurantRepository.save(r);
     }
 

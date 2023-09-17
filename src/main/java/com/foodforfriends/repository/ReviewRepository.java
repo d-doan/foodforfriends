@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    // note the parameter has to be exactly what the field is otherwise spring
-    // explodes
     List<Review> findByUsername(String username);
 
     List<Review> findByRestaurantName(String restaurantName);

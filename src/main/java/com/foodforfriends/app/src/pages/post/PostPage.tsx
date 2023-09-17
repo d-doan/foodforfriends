@@ -48,7 +48,6 @@ const PostPage = () => {
             });
     };
 
-    // TODO make click bring up review page
     const restaurantClick = (restaurant: any) => {
         setShowReviewForm(true);
         setSelectedRestaurant(restaurant);
