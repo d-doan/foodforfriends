@@ -14,7 +14,6 @@ public class Utility {
     private static Calendar cal = Calendar.getInstance();
     private static TimeComparator tc = new TimeComparator();
 
-
     public static double round(double value, int precision) {
         int scale = (int) Math.pow(10, precision);
         return (double) Math.round(value * scale) / scale;
@@ -23,6 +22,7 @@ public class Utility {
     public static String getTime() {
         // "2023-08-30 10:30:00"
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        cal = Calendar.getInstance();
         return dateFormat.format(cal.getTime());
     }
 
