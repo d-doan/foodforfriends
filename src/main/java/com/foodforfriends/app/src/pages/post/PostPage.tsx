@@ -5,6 +5,7 @@ import AddReviewButtons from "./AddReviewButtons";
 
 // TODO implement loading animation
 // TODO fix submission bug where can't convert from undefined string to Double
+//      only occurs sometimes when querying for restaurant, unsure of cause
 
 const PostPage = () => {
     const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
@@ -55,7 +56,7 @@ const PostPage = () => {
 
     return (
         <div>
-            <h4>Search Restaurants</h4>
+            <h3 className="text-center">Search for Restaurants Below</h3>
             <RestaurantSearchBar onSearch={handleSearch}></RestaurantSearchBar>
             {restaurantsSearchList.length !== 0 && !showReviewForm && <RestaurantList restaurants={restaurantsSearchList} restaurantClick={restaurantClick}></RestaurantList>}
             {showReviewForm && <AddReviewButtons restaurant={selectedRestaurant}></AddReviewButtons>}
