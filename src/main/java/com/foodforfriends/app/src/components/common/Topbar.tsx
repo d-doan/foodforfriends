@@ -30,7 +30,7 @@ const Topbar = () => {
         <Typography variant="h5">
           Food For Friends
         </Typography>
-        <div className="classes.profile">
+        <div style={{display:'flex', alignItems:'end'}}>
           {error && <p>Authentication Error</p>}
           {!error && isLoading && <p>Loading...</p>}
           {!error && !isLoading && (

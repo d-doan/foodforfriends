@@ -5,9 +5,9 @@ const Profile = () => {
   const { user, isAuthenticated } = useAuth0();
     if (isAuthenticated) {
       return (
-        <article className='column'>
-            {user?.picture && <img src={user.picture} alt={user?.name} />}
-            <h2>{user?.name}</h2>
+        <article style={{display: 'flex', flexDirection: 'column', padding: '4px'}}>
+            {user?.picture && <img src={user.picture} alt={user?.name} width={50} height={50}/>}
+            {user?.name}
         </article>
       )
     } else {

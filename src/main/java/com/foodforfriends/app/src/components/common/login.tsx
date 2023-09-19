@@ -6,13 +6,13 @@ const Login = () => {
   const { logout } = useAuth0();
     if (!isAuthenticated) {
       return (
-          <button onClick={() => loginWithRedirect()}>
+          <button onClick={() => loginWithRedirect()} style={{width:'80px', height:'30px'}}>
             Sign In
           </button>
         );
     } else {
       return (
-          <button onClick={() => logout()}>
+          <button onClick={() => logout()} style={{width:'80px', height:'30px'}}>
             Logout
           </button>
         );
