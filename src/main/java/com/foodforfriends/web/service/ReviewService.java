@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.foodforfriends.model.Review;
+import com.foodforfriends.model.ReviewAndRestaurantData;
 import com.foodforfriends.repository.ReviewRepository;
 import com.foodforfriends.utility.Utility;
 import com.google.maps.model.PlacesSearchResult;
@@ -25,12 +26,11 @@ import com.google.maps.model.PlacesSearchResult;
 @Service
 public class ReviewService {
 
-    // use id as a placeholder until a better key is decided upon
-
     @Autowired
     private ReviewRepository reviewRepository;
     @Autowired
     private RestaurantService restaurantService;
+
     private final Logger log = LoggerFactory.getLogger(ReviewService.class);
 
     public Collection<Review> getReviews() {
@@ -51,30 +51,40 @@ public class ReviewService {
     }
 
     public ResponseEntity<Review> createReview(@RequestBody Review review) throws URISyntaxException {
-        log.info("Request to create review: {}", review);
         review.setDatePosted(Utility.getTime());
         try {
             review.setDateReadable(Utility.timeToString(review.getDatePosted()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        log.info("Request to create review: {}", review);
         Review result = reviewRepository.save(review);
         restaurantService.addReview(review.getRestaurantName(), review);
-        // gonna have to add review to user reviewList as well
         return ResponseEntity.created(new URI("/review/" + result.getId())).body(result);
     }
 
-    public ResponseEntity<Review> createReview(@RequestBody Review review,
-            @RequestBody PlacesSearchResult restaurantData) throws URISyntaxException {
-        // Add review to db
-        log.info("Request to create review: {}", review);
+    public ResponseEntity<Review> createReview(@RequestBody ReviewAndRestaurantData reviewAndRestaurantData)
+            throws URISyntaxException {
+
+        Review review = reviewAndRestaurantData.getReview();
+        PlacesSearchResult restaurantData = reviewAndRestaurantData.getRestaurantData();
+
         review.setRestaurantName(restaurantData.name);
         review.setDatePosted(Utility.getTime());
+        try {
+            review.setDateReadable(Utility.timeToString(review.getDatePosted()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        log.info("Request to create review: {}", review);
         Review newReview = reviewRepository.save(review);
 
         if (restaurantService.getRestaurant(restaurantData.name).getStatusCode() == HttpStatus.NOT_FOUND) {
             // Add restaurant to db if doesn't already exist
             restaurantService.createNewRestaurant(restaurantData, newReview);
+        } else {
+            restaurantService.addReview(restaurantData.name, newReview);
         }
         return ResponseEntity.created(new URI("/review/" + newReview.getId())).body(newReview);
     }

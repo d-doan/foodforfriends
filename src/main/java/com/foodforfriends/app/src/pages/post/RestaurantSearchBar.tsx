@@ -1,5 +1,6 @@
-import { useState } from "react";
-import TextField from '@mui/material/TextField';
+import { useState, FormEvent } from "react";
+import { IconButton, TextField } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 interface SearchBarProps {
     onSearch: (query: string) => void;
@@ -12,23 +13,42 @@ const RestaurantSearchBar = ({ onSearch }: SearchBarProps) => {
         setQuery(e.target.value);
     };
 
-    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            onSearch(query);
-        }
+    const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        onSearch(query);
+    }
+
+    // wizard type gymnastics
+    const handleClick = () => {
+        const syntheticEvent = new Event('submit', { bubbles: true });
+        const formEvent = syntheticEvent as unknown as FormEvent<HTMLFormElement>;
+        handleSearch(formEvent);
     }
 
     return (
-        <div>
-            <TextField
-                id="outlined-basic"
-                label="Search Restaurants"
-                variant="outlined"
-                onChange={handleInputChange}
-                onKeyDown={handleKeyPress}
-            />
+        <div className="text-center">
+            <form
+                onSubmit={handleSearch}>
+                <TextField
+                    id="searchBar"
+                    className="text"
+                    value={query}
+                    label="Search Restaurants"
+                    size="medium"
+                    variant="outlined"
+                    onChange={handleInputChange}
+                />
+                <IconButton
+                    type="submit"
+                    aria-label="search"
+                    size="large"
+                    onClick={handleClick}>
+                    <SearchIcon style={{ fill: "blue" }} />
+                </IconButton>
+            </form>
         </div>
     );
+
 };
 
 export default RestaurantSearchBar;

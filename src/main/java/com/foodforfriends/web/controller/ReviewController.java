@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodforfriends.model.Review;
+import com.foodforfriends.model.ReviewAndRestaurantData;
 import com.foodforfriends.web.service.ReviewService;
-import com.google.maps.model.PlacesSearchResult;
 
 @RestController
 public class ReviewController {
@@ -44,9 +44,9 @@ public class ReviewController {
     }
 
     @PostMapping("/review/")
-    ResponseEntity<Review> createReview(@RequestBody Review review, @RequestBody PlacesSearchResult restaurantData)
+    ResponseEntity<Review> createReview(@RequestBody ReviewAndRestaurantData reviewAndRestaurantData)
             throws URISyntaxException {
-        return reviewService.createReview(review, restaurantData);
+        return reviewService.createReview(reviewAndRestaurantData);
     }
 
     @PutMapping("/review/{id}")

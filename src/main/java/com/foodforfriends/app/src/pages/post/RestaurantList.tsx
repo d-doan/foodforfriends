@@ -19,7 +19,8 @@ const RestaurantList = ({ restaurants, restaurantClick }: restaurantsProp) => {
     }
     return (
         <div>
-            no array, sad (async call hasn't returned yet so need to press search again, handle this)
+            no array, sad (async call hasn't returned yet so need to press search again, handle this)<br></br>
+            may or may not be bugged sometimes too
         </div>
     );
 };
