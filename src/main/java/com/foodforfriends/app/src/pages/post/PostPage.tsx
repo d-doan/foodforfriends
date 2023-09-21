@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
 import RestaurantList from "./RestaurantList";
 import RestaurantSearchBar from "./RestaurantSearchBar";
+import AddReviewButtons from "./AddReviewButtons";
 
-// TODO implement loading symbol though so its not jank
-
-// TODO implement on click handler opening review page
-
-// TODO save to db after form
-
-// TODO make look nicer
+// TODO implement loading animation
+// TODO fix submission bug where can't convert from undefined string to Double
+//      only occurs sometimes when querying for restaurant, unsure of cause
 
 const PostPage = () => {
     const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
-    const [restaurants, setRestaurants] = useState([]);
+    const [restaurantsSearchList, setRestaurantsSearchList] = useState([]);
     const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+    const [showReviewForm, setShowReviewForm] = useState(false);
 
     // get user location
     useEffect(() => {
@@ -21,6 +19,7 @@ const PostPage = () => {
             navigator.geolocation.getCurrentPosition(
                 position => {
                     const { latitude, longitude } = position.coords;
+                    console.log("reached lat and lang");
                     setUserLocation({ lat: latitude, lng: longitude });
                 },
                 error => {
@@ -28,9 +27,9 @@ const PostPage = () => {
                 }
             );
         } else {
-            console.error("Geolocation is not available");
+            console.error("Geolocation is not available, please turn on location to search for restaurants");
         }
-    }, [])
+    }, []);
 
     const handleSearch = (query: string) => {
         const apiUrl = 'map/search';
@@ -40,6 +39,8 @@ const PostPage = () => {
             lng: userLocation?.lng.toString(),
         };
 
+        console.log(queryParams);
+
         const queryString = Object.entries(queryParams)
             .map(([key, value]) => `${key}=${value}`)
             .join('&');
@@ -47,24 +48,21 @@ const PostPage = () => {
         fetch(`${apiUrl}?${queryString}`)
             .then(response => response.json())
             .then((data) => {
-                setRestaurants(data);
+                setRestaurantsSearchList(data);
             });
-        console.log(restaurants);
     };
 
-    // TODO make click bring up review page
     const restaurantClick = (restaurant: any) => {
-        console.log("CLICKED " + restaurant.formattedAddress);
+        setShowReviewForm(true);
+        setSelectedRestaurant(restaurant);
     };
-
-    // when something on list is clicked then bring up more shenanigans for review
-    // after form is submitted, redirect to review feed?
 
     return (
         <div>
-            <h4>Search Restaurants</h4>
             <RestaurantSearchBar onSearch={handleSearch}></RestaurantSearchBar>
-            {restaurants.length !== 0 && <RestaurantList restaurants={restaurants} restaurantClick={restaurantClick}></RestaurantList>}
+            <br></br>
+            {restaurantsSearchList.length !== 0 && !showReviewForm && <RestaurantList restaurants={restaurantsSearchList} restaurantClick={restaurantClick}></RestaurantList>}
+            {showReviewForm && <AddReviewButtons restaurant={selectedRestaurant}></AddReviewButtons>}
         </div>
     );
 };
