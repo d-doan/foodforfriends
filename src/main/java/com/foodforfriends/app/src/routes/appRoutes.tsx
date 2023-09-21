@@ -1,11 +1,9 @@
 import { RouteType } from "./config";
 import HomePage from "../pages/home/HomePage";
-import ReviewPage from "../pages/reviews/ReviewPage";
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 import FriendPage from "../pages/friends/FriendPage";
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import PostPage from "../pages/post/PostPage";
-import { DriveFileRenameOutline } from "@mui/icons-material";
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 
 /**
@@ -38,16 +36,6 @@ const appRoutes: RouteType[] = [
             icon: <GroupOutlinedIcon />
         }
     },
-    // Review Page
-    {
-        path: "/reviews",
-        element: <ReviewPage />,
-        state: "reviews",
-        sidebarProps: {
-            displayText: "Reviews",
-            icon: <RateReviewOutlinedIcon />
-        }
-    },
     // Post Page
     {
         path: "/post",
@@ -55,7 +43,7 @@ const appRoutes: RouteType[] = [
         state: "post",
         sidebarProps: {
             displayText: "Post",
-            icon: <DriveFileRenameOutline />
+            icon: <RateReviewOutlinedIcon />
         }
     }
 ];
