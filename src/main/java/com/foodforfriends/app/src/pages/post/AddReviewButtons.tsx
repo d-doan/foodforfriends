@@ -40,8 +40,6 @@ function AddReviewButtons({ restaurant }: any) {
             description: description
         };
 
-        console.log(newReview);
-
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -57,7 +55,6 @@ function AddReviewButtons({ restaurant }: any) {
                     alert("An error has occured, please try again");
                     throw new Error(`HTTP Error. Status: ${response.status}`);
                 }
-                // return response.json()
             })
             .then(data => {
                 console.log('Success:', data);

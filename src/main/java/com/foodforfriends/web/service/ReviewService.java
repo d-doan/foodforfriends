@@ -26,12 +26,11 @@ import com.google.maps.model.PlacesSearchResult;
 @Service
 public class ReviewService {
 
-    // use id as a placeholder until a better key is decided upon
-
     @Autowired
     private ReviewRepository reviewRepository;
     @Autowired
     private RestaurantService restaurantService;
+
     private final Logger log = LoggerFactory.getLogger(ReviewService.class);
 
     public Collection<Review> getReviews() {
