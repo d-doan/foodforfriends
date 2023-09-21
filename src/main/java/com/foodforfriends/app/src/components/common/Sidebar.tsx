@@ -5,7 +5,7 @@ import colorConfigs from "../../configs/colorConfigs";
 import appRoutes from "../../routes/appRoutes";
 import SidebarItem from "./SidebarItem";
 import SidebarItemCollapse from "./SidebarItemCollapse";
-import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 
 const Sidebar = () => {
   return (
@@ -32,7 +32,7 @@ const Sidebar = () => {
             justifyContent="center"
           >
             {/* Generate Top Icon */}
-            <RoomOutlinedIcon sx={{ fontSize: "42px", color: colorConfigs.logoColor }} />
+            <RestaurantIcon sx={{ fontSize: "42px", color: colorConfigs.logoColor }} />
           </Stack>
         </Toolbar>
         {/* Generate Sidebar Buttons */}

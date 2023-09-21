@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemButton, ListItemText, Paper } from '@mui/material';
+import { List, ListItem, ListItemButton, ListItemText, Paper, Typography, Box } from '@mui/material';
 
 interface restaurantsProp {
     restaurants: any[];
@@ -10,20 +10,36 @@ const RestaurantList = ({ restaurants, restaurantClick }: restaurantsProp) => {
         restaurants = restaurants.slice(0, 5);
 
         return (
-            <Paper elevation={2}>
-                <List disablePadding={true}>
-                    <ListItem divider={true}>
-                        <ListItemText primary={"Search Results"} />
-                    </ListItem>
-                    {restaurants.map((restaurant, index) => (
-                        <ListItem key={index} divider={true} disablePadding={true}>
-                            <ListItemButton onClick={() => restaurantClick(restaurant)}>
-                                <ListItemText primary={`${index + 1}. Name: ${restaurant.name} Address: ${restaurant.formattedAddress}`} />
-                            </ListItemButton>
+            <Box display="flex" justifyContent="center">
+
+                <Paper elevation={2} sx={{ width: '60%', maxWidth: 'xs' }}>
+                    <List disablePadding={true}>
+                        <ListItem divider={true}>
+                            <ListItemText primary={
+                                <Typography variant='h5'>
+                                    {"Search Results"}
+                                </Typography>} />
                         </ListItem>
-                    ))}
-                </List>
-            </Paper>
+                        {restaurants.map((restaurant, index) => (
+                            <ListItem key={index} divider={true} disablePadding={true}>
+                                <ListItemButton onClick={() => restaurantClick(restaurant)}>
+                                    <ListItemText
+                                        primary={
+                                            <Typography variant="h6">
+                                                {`${index + 1}. ${restaurant.name}`}
+                                            </Typography>
+                                        }
+                                        secondary={
+                                            <Typography variant="body2" sx={{ marginLeft: '1.6%' }}>
+                                                {restaurant.formattedAddress}
+                                            </Typography>} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
+                </Paper>
+            </Box>
+
         );
     }
     return (
