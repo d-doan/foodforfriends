@@ -19,6 +19,7 @@ const PostPage = () => {
             navigator.geolocation.getCurrentPosition(
                 position => {
                     const { latitude, longitude } = position.coords;
+                    console.log("reached lat and lang");
                     setUserLocation({ lat: latitude, lng: longitude });
                 },
                 error => {
@@ -38,6 +39,8 @@ const PostPage = () => {
             lng: userLocation?.lng.toString(),
         };
 
+        console.log(queryParams);
+
         const queryString = Object.entries(queryParams)
             .map(([key, value]) => `${key}=${value}`)
             .join('&');
@@ -56,8 +59,8 @@ const PostPage = () => {
 
     return (
         <div>
-            <h3 className="text-center">Search for Restaurants Below</h3>
             <RestaurantSearchBar onSearch={handleSearch}></RestaurantSearchBar>
+            <br></br>
             {restaurantsSearchList.length !== 0 && !showReviewForm && <RestaurantList restaurants={restaurantsSearchList} restaurantClick={restaurantClick}></RestaurantList>}
             {showReviewForm && <AddReviewButtons restaurant={selectedRestaurant}></AddReviewButtons>}
         </div>

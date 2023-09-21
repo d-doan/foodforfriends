@@ -13,7 +13,7 @@ public class GoogleMapsConfig {
     private String apiKey;
 
     @Bean
-    public GeoApiContext geoApiContext() {
+    GeoApiContext geoApiContext() {
         return new GeoApiContext.Builder()
                 .apiKey(apiKey)
                 .build();

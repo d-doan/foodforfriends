@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { IconButton, TextField } from "@mui/material";
+import { IconButton, TextField, Container } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 interface SearchBarProps {
@@ -26,14 +26,14 @@ const RestaurantSearchBar = ({ onSearch }: SearchBarProps) => {
     }
 
     return (
-        <div className="text-center">
+        <Container maxWidth="xs">
             <form
                 onSubmit={handleSearch}>
                 <TextField
                     id="searchBar"
                     className="text"
                     value={query}
-                    label="Search Restaurants"
+                    label="Search for restaurants"
                     size="medium"
                     variant="outlined"
                     onChange={handleInputChange}
@@ -46,7 +46,7 @@ const RestaurantSearchBar = ({ onSearch }: SearchBarProps) => {
                     <SearchIcon style={{ fill: "blue" }} />
                 </IconButton>
             </form>
-        </div>
+        </Container>
     );
 
 };
