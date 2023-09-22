@@ -1,5 +1,5 @@
 import { RouteType } from "./config";
-import HomePage from "../pages/home/HomePage";
+import FeedPage from "../pages/feed/FeedPage";
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 import FriendPage from "../pages/friends/FriendPage";
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
@@ -14,13 +14,13 @@ const appRoutes: RouteType[] = [
     // Feed
     {
         index: true,
-        element: <HomePage />,
-        state: "home",
+        element: <FeedPage />,
+        state: "feed",
     },
     {
         path: "/",
-        element: <HomePage />,
-        state: "home",
+        element: <FeedPage />,
+        state: "feed",
         sidebarProps: {
             displayText: "Feed",
             icon: <FeedOutlinedIcon />

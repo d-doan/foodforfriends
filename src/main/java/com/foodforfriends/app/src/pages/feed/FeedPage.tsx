@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import FeedTable from './FeedTable';
 
 type Props = {};
 
-const HomePage = (props: Props) => {
+const FeedPage = (props: Props) => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -21,4 +21,4 @@ const HomePage = (props: Props) => {
   );
 };
 
-export default HomePage;
+export default FeedPage;
