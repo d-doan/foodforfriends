@@ -42,9 +42,7 @@ const RestaurantList = ({ restaurants, restaurantClick }: restaurantsProp) => {
         );
     }
     return (
-        <div>
-            currently retrieving user location asynchronously, need to fix this by add loading animation to signal
-        </div>
+        <></>
     );
 };
 
