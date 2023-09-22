@@ -35,10 +35,8 @@ const FeedTable = ({ reviews }: ReviewListProps) => {
                 {reviews.map((review) => (
                     <ListItem key={review.id} divider={true}>
                         <div>
-
-                            <ListItemIcon>
+                            <ListItemIcon >
                                 <AccountCircleIcon fontSize='large' />
-                                username
                             </ListItemIcon>
                         </div>
 

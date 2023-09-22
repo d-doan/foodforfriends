@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import RestaurantList from "./RestaurantList";
 import RestaurantSearchBar from "./RestaurantSearchBar";
 import AddReviewButtons from "./AddReviewButtons";
+import { Box, CircularProgress, Typography } from "@mui/material";
 
 // TODO implement loading animation
 // TODO fix submission bug where can't convert from undefined string to Double
@@ -59,10 +60,33 @@ const PostPage = () => {
 
     return (
         <div>
-            <RestaurantSearchBar onSearch={handleSearch}></RestaurantSearchBar>
-            <br></br>
-            {restaurantsSearchList.length !== 0 && !showReviewForm && <RestaurantList restaurants={restaurantsSearchList} restaurantClick={restaurantClick}></RestaurantList>}
-            {showReviewForm && <AddReviewButtons restaurant={selectedRestaurant}></AddReviewButtons>}
+            {userLocation ? (
+                <div>
+                    <RestaurantSearchBar onSearch={handleSearch} />
+                    <br></br>
+                    {restaurantsSearchList.length !== 0 && !showReviewForm && (
+                        <RestaurantList
+                            restaurants={restaurantsSearchList}
+                            restaurantClick={restaurantClick}
+                        />
+                    )}
+                    {showReviewForm && <AddReviewButtons restaurant={selectedRestaurant} />}
+                </div>
+            ) : (
+                <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    justifyContent="center"
+                >
+                    <CircularProgress size="80px" />
+                    <Box m={2}>
+                        <Typography variant='h5'>
+                            Fetching Location
+                        </Typography>
+                    </Box>
+                </Box>
+            )}
         </div>
     );
 };
