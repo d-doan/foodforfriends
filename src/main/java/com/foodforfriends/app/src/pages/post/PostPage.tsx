@@ -4,10 +4,6 @@ import RestaurantSearchBar from "./RestaurantSearchBar";
 import AddReviewButtons from "./AddReviewButtons";
 import { Box, CircularProgress, Typography } from "@mui/material";
 
-// TODO implement loading animation
-// TODO fix submission bug where can't convert from undefined string to Double
-//      only occurs sometimes when querying for restaurant, unsure of cause
-
 const PostPage = () => {
     const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
     const [restaurantsSearchList, setRestaurantsSearchList] = useState([]);
@@ -20,7 +16,6 @@ const PostPage = () => {
             navigator.geolocation.getCurrentPosition(
                 position => {
                     const { latitude, longitude } = position.coords;
-                    console.log("reached lat and lang");
                     setUserLocation({ lat: latitude, lng: longitude });
                 },
                 error => {
@@ -39,8 +34,6 @@ const PostPage = () => {
             lat: userLocation?.lat.toString(),
             lng: userLocation?.lng.toString(),
         };
-
-        console.log(queryParams);
 
         const queryString = Object.entries(queryParams)
             .map(([key, value]) => `${key}=${value}`)
