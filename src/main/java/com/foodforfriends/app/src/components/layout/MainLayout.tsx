@@ -1,23 +1,13 @@
 import { Box, Toolbar } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import Topbar from "../common/Topbar";
-import Sidebar from "../common/Sidebar";
 import sizeConfigs from "../../configs/sizeConfigs";
 import colorConfigs from "../../configs/colorConfigs";
+import TopNavbar from "../common/TopNavbar";
 
 const MainLayout = () => {
   return (
-    <Box sx={{ display: "flex"}}>
-      <Topbar/>
-      <Box
-        component="nav"
-        sx={{
-          width: sizeConfigs.sidebar.width,
-          flexShrink: 0
-        }}
-      >
-        <Sidebar />
-      </Box>
+    <Box sx={{ display: "flex" }}>
+      <TopNavbar />
       <Box
         component="main"
         sx={{
@@ -31,7 +21,7 @@ const MainLayout = () => {
         <Toolbar />
         <Outlet />
       </Box>
-    </Box>
+    </Box >
   );
 };
 
