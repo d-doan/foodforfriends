@@ -1,12 +1,10 @@
-import { ReviewListProps, ReviewProps } from '../../components/common/CustomTypes';
-import { List, ListItem, ListItemText, Typography, Box, ListItemIcon, Rating } from '@mui/material';
+import { ReviewListProps } from '../../components/common/CustomTypes';
+import { List, ListItem, ListItemText, Typography, Box, Rating } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CostRating from '../../configs/costRating';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-
 const FeedTable = ({ reviews }: ReviewListProps) => {
-
     return (
         <Box display="flex">
             <List disablePadding={true}>
@@ -19,11 +17,9 @@ const FeedTable = ({ reviews }: ReviewListProps) => {
                 </ListItem>
                 {reviews.map((review) => (
                     <ListItem key={review.id} divider={true}>
-                        <Box alignItems="center" >
-                            <ListItemIcon>
-                                <AccountCircleIcon fontSize="large" />
-                            </ListItemIcon>
-                            <Typography variant="caption" display="block">
+                        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" paddingRight={2}>
+                            <AccountCircleIcon fontSize="large" />
+                            <Typography variant="caption" display="block" align="center">
                                 {`${review.username}`}
                             </Typography>
                         </Box>
