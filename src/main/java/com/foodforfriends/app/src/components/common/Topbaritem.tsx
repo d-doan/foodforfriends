@@ -2,6 +2,7 @@ import { RouteType } from '../../routes/config';
 import { ListItemButton, Typography } from "@mui/material"
 import { Link } from "react-router-dom"
 import colorConfigs from '../../configs/colorConfigs';
+import NavbarFont from './NavbarFont';
 
 type Props = {
     item: RouteType;
@@ -22,7 +23,7 @@ const Topbaritem = ({ item }: Props) => {
                 }}
             >
 
-                <Typography variant="h5" sx={{ textAlign: 'center', width: '100%' }}>
+                <Typography variant="h5" sx={{ textAlign: 'center', width: '100%' }} style={NavbarFont}>
                     {item.sidebarProps.displayText}
                 </Typography>
             </ListItemButton>

@@ -3,6 +3,7 @@ import colorConfigs from '../../configs/colorConfigs';
 import sizeConfigs from '../../configs/sizeConfigs';
 import appRoutes from '../../routes/appRoutes';
 import Topbaritem from './Topbaritem';
+import NavbarFont from "./NavbarFont";
 
 const TopNavbar = () => {
     return (
@@ -16,7 +17,7 @@ const TopNavbar = () => {
             }}
         >
             <Toolbar>
-                <Typography variant="h6">
+                <Typography variant="h5" style={NavbarFont}>
                     Food For Friends
                 </Typography>
                 {appRoutes.map((route, index) => (
