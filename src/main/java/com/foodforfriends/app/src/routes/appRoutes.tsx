@@ -26,16 +26,6 @@ const appRoutes: RouteType[] = [
             icon: <FeedOutlinedIcon />
         },
     },
-    // Friend Page
-    {
-        path: "/friends",
-        element: <FriendPage />,
-        state: "friends",
-        sidebarProps: {
-            displayText: "Friends",
-            icon: <GroupOutlinedIcon />
-        }
-    },
     // Post Page
     {
         path: "/post",

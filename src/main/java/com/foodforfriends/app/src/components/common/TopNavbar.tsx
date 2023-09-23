@@ -16,7 +16,7 @@ const TopNavbar = () => {
             }}
         >
             <Toolbar>
-                <Typography variant="h5">
+                <Typography variant="h6">
                     Food For Friends
                 </Typography>
                 {appRoutes.map((route, index) => (
