@@ -72,10 +72,11 @@ public class Initializer implements CommandLineRunner {
                 restaurantRepository.save(restaurant1);
 
                 // PRINTING DATA
+                List<User> users = userRepository.findAll();
                 List<Review> reviews = reviewRepository.findAll();
 
                 System.out.println("\n----------------------USER----------------------\n");
-                reviews.forEach(System.out::println);
+                users.forEach(System.out::println);
 
                 System.out.println("\n----------------------RESTAURANT----------------------\n");
                 reviews.forEach(System.out::println);

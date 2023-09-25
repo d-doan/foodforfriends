@@ -1,20 +1,21 @@
 import { SyntheticEvent, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 // restaurant represents a PlacesSearchResult object
 function AddReviewButtons({ restaurant }: any) {
     const restaurantName = restaurant.name;
-    const [username, setUsername] = useState('');
+    const { user } = useAuth0();
     const [rating, setRating] = useState('');
     const [cost, setCost] = useState('');
     const [description, setDescription] = useState('');
     const navigate = useNavigate();
 
 
-    const usernameChangeHandler = (e: SyntheticEvent) => {
-        setUsername((e.target as HTMLInputElement).value);
-    };
+    // const usernameChangeHandler = (e: SyntheticEvent) => {
+    //     setUsername((e.target as HTMLInputElement).value);
+    // };
     const ratingChangeHandler = (e: SyntheticEvent) => {
         setRating((e.target as HTMLInputElement).value);
     };
@@ -34,7 +35,7 @@ function AddReviewButtons({ restaurant }: any) {
 
         const newReview = {
             restaurantName: restaurantName,
-            username: username,
+            username: user?.name,
             rating: rating,
             cost: cost,
             description: description
@@ -65,7 +66,7 @@ function AddReviewButtons({ restaurant }: any) {
             });
 
         // reset values to default
-        setUsername('');
+        //setUsername('');
         setRating('');
         setCost('');
         setDescription('');
@@ -76,15 +77,15 @@ function AddReviewButtons({ restaurant }: any) {
             <h4>Review for {restaurantName}</h4>
             <Form onSubmit={SubmitHandler}>
 
-                <Form.Group className="mb-3" controlId="username">
+                {/* <Form.Group className="mb-3" controlId="username">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Username"
-                        value={username}
-                        onChange={usernameChangeHandler}
+                        value={user?.name}
+                        //onChange={usernameChangeHandler}
                     />
-                </Form.Group>
+                </Form.Group> */}
 
                 <Form.Group className="mb-3" controlId="rating">
                     <Form.Label>Rating</Form.Label>
