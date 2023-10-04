@@ -11,8 +11,7 @@ const RestaurantList = ({ restaurants, restaurantClick }: restaurantsProp) => {
 
         return (
             <Box display="flex" justifyContent="center">
-
-                <Paper elevation={2} sx={{ width: '60%', maxWidth: 'xs' }}>
+                <Paper elevation={2} sx={{ width: '100%', maxWidth: 'xs' }}>
                     <List disablePadding={true}>
                         <ListItem divider={true}>
                             <ListItemText primary={
@@ -43,9 +42,7 @@ const RestaurantList = ({ restaurants, restaurantClick }: restaurantsProp) => {
         );
     }
     return (
-        <div>
-            currently retrieving user location asynchronously, need to fix this by add loading animation to signal
-        </div>
+        <></>
     );
 };
 

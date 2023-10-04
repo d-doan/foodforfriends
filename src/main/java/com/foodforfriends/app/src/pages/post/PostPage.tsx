@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import RestaurantList from "./RestaurantList";
 import RestaurantSearchBar from "./RestaurantSearchBar";
 import AddReviewButtons from "./AddReviewButtons";
-
-// TODO implement loading animation
-// TODO fix submission bug where can't convert from undefined string to Double
-//      only occurs sometimes when querying for restaurant, unsure of cause
+import { Box, CircularProgress, Typography } from "@mui/material";
 
 const PostPage = () => {
     const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
@@ -19,7 +16,6 @@ const PostPage = () => {
             navigator.geolocation.getCurrentPosition(
                 position => {
                     const { latitude, longitude } = position.coords;
-                    console.log("reached lat and lang");
                     setUserLocation({ lat: latitude, lng: longitude });
                 },
                 error => {
@@ -39,8 +35,6 @@ const PostPage = () => {
             lng: userLocation?.lng.toString(),
         };
 
-        console.log(queryParams);
-
         const queryString = Object.entries(queryParams)
             .map(([key, value]) => `${key}=${value}`)
             .join('&');
@@ -59,10 +53,33 @@ const PostPage = () => {
 
     return (
         <div>
-            <RestaurantSearchBar onSearch={handleSearch}></RestaurantSearchBar>
-            <br></br>
-            {restaurantsSearchList.length !== 0 && !showReviewForm && <RestaurantList restaurants={restaurantsSearchList} restaurantClick={restaurantClick}></RestaurantList>}
-            {showReviewForm && <AddReviewButtons restaurant={selectedRestaurant}></AddReviewButtons>}
+            {userLocation ? (
+                <div>
+                    <RestaurantSearchBar onSearch={handleSearch} />
+                    <br></br>
+                    {restaurantsSearchList.length !== 0 && !showReviewForm && (
+                        <RestaurantList
+                            restaurants={restaurantsSearchList}
+                            restaurantClick={restaurantClick}
+                        />
+                    )}
+                    {showReviewForm && <AddReviewButtons restaurant={selectedRestaurant} />}
+                </div>
+            ) : (
+                <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    justifyContent="center"
+                >
+                    <CircularProgress size="80px" />
+                    <Box m={2}>
+                        <Typography variant='h5'>
+                            Fetching Location
+                        </Typography>
+                    </Box>
+                </Box>
+            )}
         </div>
     );
 };

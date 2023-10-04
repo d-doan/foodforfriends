@@ -1,4 +1,4 @@
-import { Drawer, List, Toolbar, Stack/*, Avatar, ListItemButton, ListItemIcon */ } from "@mui/material"
+import { Drawer, List, Toolbar, Stack } from "@mui/material"
 import sizeConfigs from "../../configs/sizeConfigs";
 // import assets from "../../assets/images";
 import colorConfigs from "../../configs/colorConfigs";
@@ -38,11 +38,7 @@ const Sidebar = () => {
         {/* Generate Sidebar Buttons */}
         {appRoutes.map((route, index) => (
           route.sidebarProps ? (
-            route.child ? (
-              <SidebarItemCollapse item={route} key={index} />
-            ) : (
-              <SidebarItem item={route} key={index} />
-            )
+            <SidebarItem item={route} key={index} />
           ) : null
         ))}
       </List>
