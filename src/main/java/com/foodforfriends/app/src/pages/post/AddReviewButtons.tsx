@@ -7,19 +7,20 @@ import Button from '@mui/material/Button';
 import { TextField, Box, Typography } from '@mui/material';
 import CostRating from '../../configs/costRating';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { useAuth0 } from '@auth0/auth0-react';
 
 // restaurant represents a PlacesSearchResult object
 function AddReviewButtons({ restaurant }: any) {
     const restaurantName = restaurant.name;
-    const [username, setUsername] = useState('');
+    const { user } = useAuth0();
     const [rating, setRating] = useState<number | null>(null);
     const [cost, setCost] = useState<number | null>(null);
     const [description, setDescription] = useState('');
     const navigate = useNavigate();
 
-    const usernameChangeHandler = (e: SyntheticEvent) => {
-        setUsername((e.target as HTMLInputElement).value);
-    };
+    // const usernameChangeHandler = (e: SyntheticEvent) => {
+    //     setUsername((e.target as HTMLInputElement).value);
+    // };
     const ratingChangeHandler = (e: React.ChangeEvent<{}>, newValue: number | null) => {
         setRating(newValue);
     };
@@ -45,7 +46,7 @@ function AddReviewButtons({ restaurant }: any) {
         if (validateForm()) {
             const newReview = {
                 restaurantName: restaurantName,
-                username: username,
+                username: user?.name,
                 rating: rating,
                 cost: cost,
                 description: description
@@ -76,7 +77,7 @@ function AddReviewButtons({ restaurant }: any) {
                 });
 
             // reset values to default
-            setUsername('');
+            //setUsername('');
             setRating(null);
             setCost(null);
             setDescription('');
@@ -91,15 +92,15 @@ function AddReviewButtons({ restaurant }: any) {
 
             <form onSubmit={SubmitHandler}>
                 <Box display="flex" flexDirection="column">
-                    <Box mt={2}>
+                    {/* <Box mt={2}>
                         <TextField
                             id="username"
                             label="Username"
                             variant="outlined"
-                            value={username}
-                            onChange={usernameChangeHandler}
+                            value={user?.name}
+                            // onChange={usernameChangeHandler}
                         />
-                    </Box>
+                    </Box> */}
 
                     <Box mt={2}>
                         <FormControl>

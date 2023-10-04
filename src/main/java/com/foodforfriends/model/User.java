@@ -27,6 +27,7 @@ public class User {
     private String displayName;
     private String password;
     private String email;
+    private String picture;
     private List<String> friendList;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Review> reviews;
