@@ -92,7 +92,7 @@ function AddReviewButtons({ restaurant }: any) {
 
             <form onSubmit={SubmitHandler}>
                 <Box display="flex" flexDirection="column">
-                    <Box mt={2}>
+                    {/* <Box mt={2}>
                         <TextField
                             id="username"
                             label="Username"
@@ -100,7 +100,7 @@ function AddReviewButtons({ restaurant }: any) {
                             value={user?.name}
                             // onChange={usernameChangeHandler}
                         />
-                    </Box>
+                    </Box> */}
 
                     <Box mt={2}>
                         <FormControl>

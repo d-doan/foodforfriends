@@ -23,7 +23,7 @@ const Topbar = () => {
         <Typography variant="h5">
           Food For Friends
         </Typography>
-        <div style={{display:'flex', alignItems:'end'}}>
+        {/* <div style={{display:'flex', alignItems:'end'}}>
           {error && <p>Authentication Error</p>}
           {!error && isLoading && <p>Loading...</p>}
           {!error && !isLoading && (
@@ -32,7 +32,7 @@ const Topbar = () => {
               <Login />
             </>
           )}
-        </div>
+        </div> */}
       </Toolbar>
     </AppBar>
   );
